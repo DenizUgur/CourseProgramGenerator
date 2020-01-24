@@ -1,2 +1,1480 @@
-!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=15)}([function(e,t){e.exports=require("jquery")},function(e,t){e.exports=require("electron")},,function(e,t){e.exports=require("path")},function(e,t){e.exports=require("moment")},,,function(e,t,n){var r=n(8);"string"==typeof r&&(r=[[e.i,r,""]]);var o={hmr:!0,transform:void 0,insertInto:void 0};n(10)(r,o);r.locals&&(e.exports=r.locals)},function(e,t,n){(e.exports=n(9)(!1)).push([e.i,"html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n\n.page-content {\n  padding: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-family: sans-serif;\n  color: #525252;\n}\n\n.row > * {\n  margin-bottom: 5px;\n}\n\na {\n  text-decoration: none;\n  color: #cb3837;\n}\n\ntd {\n  text-align: center !important;\n}\n\n.mdl-chip {\n  margin: 5px;\n}",""])},function(e,t){e.exports=function(e){var t=[];return t.toString=function(){return this.map(function(t){var n=function(e,t){var n=e[1]||"",r=e[3];if(!r)return n;if(t&&"function"==typeof btoa){var o=(s=r,"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(s))))+" */"),a=r.sources.map(function(e){return"/*# sourceURL="+r.sourceRoot+e+" */"});return[n].concat(a).concat([o]).join("\n")}var s;return[n].join("\n")}(t,e);return t[2]?"@media "+t[2]+"{"+n+"}":n}).join("")},t.i=function(e,n){"string"==typeof e&&(e=[[null,e,""]]);for(var r={},o=0;o<this.length;o++){var a=this[o][0];"number"==typeof a&&(r[a]=!0)}for(o=0;o<e.length;o++){var s=e[o];"number"==typeof s[0]&&r[s[0]]||(n&&!s[2]?s[2]=n:n&&(s[2]="("+s[2]+") and ("+n+")"),t.push(s))}},t}},function(e,t,n){var r,o,a={},s=(r=function(){return window&&document&&document.all&&!window.atob},function(){return void 0===o&&(o=r.apply(this,arguments)),o}),i=function(e){var t={};return function(e){if("function"==typeof e)return e();if(void 0===t[e]){var n=function(e){return document.querySelector(e)}.call(this,e);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(e){n=null}t[e]=n}return t[e]}}(),c=null,l=0,u=[],f=n(11);function d(e,t){for(var n=0;n<e.length;n++){var r=e[n],o=a[r.id];if(o){o.refs++;for(var s=0;s<o.parts.length;s++)o.parts[s](r.parts[s]);for(;s<r.parts.length;s++)o.parts.push(y(r.parts[s],t))}else{var i=[];for(s=0;s<r.parts.length;s++)i.push(y(r.parts[s],t));a[r.id]={id:r.id,refs:1,parts:i}}}}function p(e,t){for(var n=[],r={},o=0;o<e.length;o++){var a=e[o],s=t.base?a[0]+t.base:a[0],i={css:a[1],media:a[2],sourceMap:a[3]};r[s]?r[s].parts.push(i):n.push(r[s]={id:s,parts:[i]})}return n}function h(e,t){var n=i(e.insertInto);if(!n)throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");var r=u[u.length-1];if("top"===e.insertAt)r?r.nextSibling?n.insertBefore(t,r.nextSibling):n.appendChild(t):n.insertBefore(t,n.firstChild),u.push(t);else if("bottom"===e.insertAt)n.appendChild(t);else{if("object"!=typeof e.insertAt||!e.insertAt.before)throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");var o=i(e.insertInto+" "+e.insertAt.before);n.insertBefore(t,o)}}function m(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e);var t=u.indexOf(e);t>=0&&u.splice(t,1)}function v(e){var t=document.createElement("style");return void 0===e.attrs.type&&(e.attrs.type="text/css"),b(t,e.attrs),h(e,t),t}function b(e,t){Object.keys(t).forEach(function(n){e.setAttribute(n,t[n])})}function y(e,t){var n,r,o,a;if(t.transform&&e.css){if(!(a=t.transform(e.css)))return function(){};e.css=a}if(t.singleton){var s=l++;n=c||(c=v(t)),r=x.bind(null,n,s,!1),o=x.bind(null,n,s,!0)}else e.sourceMap&&"function"==typeof URL&&"function"==typeof URL.createObjectURL&&"function"==typeof URL.revokeObjectURL&&"function"==typeof Blob&&"function"==typeof btoa?(n=function(e){var t=document.createElement("link");return void 0===e.attrs.type&&(e.attrs.type="text/css"),e.attrs.rel="stylesheet",b(t,e.attrs),h(e,t),t}(t),r=function(e,t,n){var r=n.css,o=n.sourceMap,a=void 0===t.convertToAbsoluteUrls&&o;(t.convertToAbsoluteUrls||a)&&(r=f(r));o&&(r+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))+" */");var s=new Blob([r],{type:"text/css"}),i=e.href;e.href=URL.createObjectURL(s),i&&URL.revokeObjectURL(i)}.bind(null,n,t),o=function(){m(n),n.href&&URL.revokeObjectURL(n.href)}):(n=v(t),r=function(e,t){var n=t.css,r=t.media;r&&e.setAttribute("media",r);if(e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}.bind(null,n),o=function(){m(n)});return r(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;r(e=t)}else o()}}e.exports=function(e,t){if("undefined"!=typeof DEBUG&&DEBUG&&"object"!=typeof document)throw new Error("The style-loader cannot be used in a non-browser environment");(t=t||{}).attrs="object"==typeof t.attrs?t.attrs:{},t.singleton||"boolean"==typeof t.singleton||(t.singleton=s()),t.insertInto||(t.insertInto="head"),t.insertAt||(t.insertAt="bottom");var n=p(e,t);return d(n,t),function(e){for(var r=[],o=0;o<n.length;o++){var s=n[o];(i=a[s.id]).refs--,r.push(i)}e&&d(p(e,t),t);for(o=0;o<r.length;o++){var i;if(0===(i=r[o]).refs){for(var c=0;c<i.parts.length;c++)i.parts[c]();delete a[i.id]}}}};var g,E=(g=[],function(e,t){return g[e]=t,g.filter(Boolean).join("\n")});function x(e,t,n,r){var o=n?"":r.css;if(e.styleSheet)e.styleSheet.cssText=E(t,o);else{var a=document.createTextNode(o),s=e.childNodes;s[t]&&e.removeChild(s[t]),s.length?e.insertBefore(a,s[t]):e.appendChild(a)}}},function(e,t){e.exports=function(e){var t="undefined"!=typeof window&&window.location;if(!t)throw new Error("fixUrls requires window.location");if(!e||"string"!=typeof e)return e;var n=t.protocol+"//"+t.host,r=n+t.pathname.replace(/\/[^\/]*$/,"/");return e.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi,function(e,t){var o,a=t.trim().replace(/^"(.*)"$/,function(e,t){return t}).replace(/^'(.*)'$/,function(e,t){return t});return/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(a)?e:(o=0===a.indexOf("//")?a:0===a.indexOf("/")?n+a:r+a.replace(/^\.\//,""),"url("+JSON.stringify(o)+")")})}},function(e,t){e.exports=require("xlsx")},function(e,t){e.exports=require("fs")},,function(e,t,n){"use strict";n.r(t);n(7);var r=n(1);const o=r.remote.Menu,a=r.remote.MenuItem,s=new a({label:"Cut",click:()=>{document.execCommand("cut")}}),i=new a({label:"Copy",click:()=>{document.execCommand("copy")}}),c=new a({label:"Paste",click:()=>{document.execCommand("paste")}}),l=new o;l.append(i);const u=new o;u.append(s),u.append(i),u.append(c),document.addEventListener("contextmenu",e=>{switch(e.target.nodeName){case"TEXTAREA":case"INPUT":e.preventDefault(),u.popup(r.remote.getCurrentWindow());break;default:(()=>""!==window.getSelection().toString())()&&(e.preventDefault(),l.popup(r.remote.getCurrentWindow()))}},!1);document.addEventListener("click",e=>{let t,n=!1;const o=a=>{"A"===a.nodeName&&(t=a.getAttribute("href")),a.classList.contains("js-external-link")&&(n=!0),t&&n?(r.shell.openExternal(t),e.preventDefault()):a.parentElement&&o(a.parentElement)};o(e.target)},!1);var f=n(0),d=n.n(f);const p=n(12),h=n(4),m=n(3),v=n(13);let b=m.join(__dirname,"bin");var y=null,g=[];function E(e,t){return e[0]<=t[0]&&t[0]<=e[1]||t[0]<=e[0]&&e[0]<=t[1]}function x(e,t){var n=y[["A","B","C","G","I","F","L"][e]+t];return n?n.v:void 0}function w(e,t){return null!=e&&null!=t&&(e[0]==t[0]&&e[1]==t[1])}function C(e){h.locale("tr");var t=[null,null],n=e.split(" | ")[0];return t[0]=e.split(" | ")[1].split(" - ")[0].trim(),t[1]=e.split(" | ")[1].split(" - ")[1].trim(),n=h.weekdays(!0).indexOf(n),t[0]=h("1,"+t[0],"d,HH:mm").add(n,"d").valueOf(),t[1]=h("1,"+t[1],"d,HH:mm").add(n,"d").valueOf(),t}function _(e){g.push(e)}String.prototype.lowerCaseAllWordsExceptFirstLetters=function(){var e=this.split(" ");return e.forEach(function(t,n){e[n]=t.charAt(0)+t.slice(1).toLowerCase()}),e.join(" ")};const O=n(4);O.locale("tr"),d()("#app").css("display","block"),d()("#courses_i").on("keypress",e=>{d()("#courses").empty(),e.target.value.split(" ").forEach(e=>{if(e.includes(".")){var t=e.substring(0,e.indexOf(".")),n=d()("<span>",{class:"mdl-chip mdl-chip--contact"});n.append(d()("<span>",{class:"mdl-chip__contact mdl-color--blue-500 mdl-color-text--white"}).html(t.toUpperCase())),n.append(d()("<span>",{class:"mdl-chip__text"}).html(e.substring(e.indexOf(".")+1))),d()("#courses").append(n)}})}),d()("#uhours_i").on("keypress",e=>{var t=[],n=["Mo","Tu","We","Th","Fr"],r=e.target.value.split(" ");r.length%2==0&&r.forEach((e,n)=>{var r=e.substring(0,e.indexOf(",")),o=e.substring(e.indexOf(",")+1),a=t.findIndex(e=>e.i==r);-1==a?t.push({i:r,clock:o}):t[a].clock=t[a].clock+" "+o}),d()("#uhours").empty(),t.forEach(e=>{var t=n[e.i-1],r=e.clock,o=d()("<span>",{class:"mdl-chip mdl-chip--contact"});o.append(d()("<span>",{class:"mdl-chip__contact mdl-color--blue-500 mdl-color-text--white"}).html(t.toUpperCase())),o.append(d()("<span>",{class:"mdl-chip__text"}).html(r)),d()("#uhours").append(o)})}),d()("#start").on("click",()=>{""!=d()("#courses_i").val()?function(e=!1){var t=[];return new Promise((n,r)=>{e&&(b=m.join(__dirname,"../app/bin")),v.readdir(b,function(e,o){e&&(_("Catalogs must be placed in 'bin' folder"),r()),o.forEach(function(e){if(".DS_Store"==e)return!1;var n=p.readFile(m.join(b,e)),r=n.SheetNames[0];y=n.Sheets[r];for(var o=2;null!=x(0,o);o++){var a={name:null,credits:null,class:null,teacher:null,corequisite:null,hours:[]};a.name=x(0,o)+"."+x(1,o),a.credits=parseInt(x(5,o)),a.class=x(2,o),a.teacher=x(3,o).lowerCaseAllWordsExceptFirstLetters(),x(4,o)&&"-"!=x(4,o)&&(a.corequisite=[],-1!=x(4,o).indexOf(" ve ")?a.corequisite=x(4,o).split(" ve "):a.corequisite=x(4,o).split(" and "),a.corequisite=a.corequisite.map(e=>e.replace(" ",".")));var s=x(6,o).split("\n");for(var i in s)if(""!=s[i])try{var c=C(s[i]);if(a.hours.length>0&&w(c,a.hours[a.hours.length-1]))continue;a.hours.push(c)}catch(e){continue}t.push(a)}}),n(t)})})}().then(e=>{(function(e,t,n=""){return new Promise((r,o)=>{var a=[],s=[];g=[],n=n.split(" "),t=t.split(" "),n.forEach(function(e,t){t%2==1&&s.push({name:null,class:null,hours:[[h(n[t-1],"d,HH:mm").valueOf(),h(e,"d,HH:mm").valueOf()]]})}),t.forEach(function(t){var n=!1;e.forEach(function(e){t==e.name&&(n=!0)}),n||_(t+" not found.")}),t.forEach(function(t,n){e.forEach(function(n){n.name==t.toUpperCase()&&(a.push(n),n.corequisite&&n.corequisite.forEach(function(t){e.forEach(function(e){e.name==t&&a.push(e)})}))})}),a.sort((e,t)=>e.class<t.class?-1:1);var i=[];a.forEach(function(e){var t={name:e.name,selected:null,collidesWith:[],candidates:[e],alternatives:[]},n=i.findIndex(t=>t.name==e.name);-1!=n?i[n].candidates.push(e):i.push(t)}),i.forEach((e,t)=>{try{e.candidates.forEach(n=>{var r=!0;if(s.forEach(e=>{e.hours.forEach(e=>{n.hours.forEach(t=>{E(e,t)&&(r=!1)})})}),r&&i.forEach((o,a)=>{if(o.selected&&o.selected.hours.forEach(e=>{n.hours.forEach(n=>{E(e,n)&&(-1==i[t].collidesWith.findIndex(e=>e.name==o.name)&&i[t].collidesWith.push(o),r=!1)})}),!r&&a==i.length-1)try{e.collidesWith.forEach(e=>{if(_(n.name+"."+n.class+" collides with "+e.name+"."+e.selected.class),!(e.candidates.length>1))throw _("There is nothing we can do!"),BreakException;_("Trying to change "+e.name+" with a different class"),e.candidates.forEach(t=>{if(e.selected.class!=t.class){var o=!0;if(i.forEach(e=>{e.selected&&e.selected.hours.forEach(e=>{t.hours.forEach(t=>{E(e,t)&&(o=!1)})})}),o){var a=i.findIndex(t=>t.name==e.name),c=e.selected;if(i[a].selected=t,s.forEach(e=>{e.hours.forEach(e=>{n.hours.forEach(t=>{E(e,t)&&(o=!1)}),t.hours.forEach(t=>{E(e,t)&&(o=!1)})})}),i.forEach(e=>{e.selected&&e.selected.hours.forEach(e=>{n.hours.forEach(t=>{E(e,t)&&(o=!1)})})}),o)throw _("Wuhuu, we can change it with "+t.name+"."+t.class),_(),r=!0,BreakException;i[a].selected=c}}}),_("Failed!\n")})}catch(e){}}),r)throw i[t].selected||(i[t].selected=n),BreakException})}catch(e){}}),i.forEach(function(e,t){if(e.selected&&e.selected.corequisite){var n=e.selected.corequisite,r=!1;n.forEach(function(e){i.forEach(function(t){t.selected&&e==t.name&&(r=!0)})}),r||(i[t].selected=null)}});var c=[],l=[],u=[];i.forEach(e=>{e.candidates.forEach(e=>{var t=!0;try{i.forEach(n=>{n.selected&&n.selected.hours.forEach(r=>{e.hours.forEach(o=>{if(t=n.name==e.name&&w(r,o)?n.selected.class!=e.class:!E(r,o),s.forEach(n=>{n.hours.forEach(n=>{e.hours.forEach(e=>{E(n,e)&&(t=!1)})})}),!t)throw BreakException()})})})}catch(e){}t&&c.push([e.name,e.class,e.teacher,h(e.hours[0][0]).day(),h(e.hours[0][0]).format("HH:mm"),h(e.hours[0][1]).format("HH:mm")])})}),i.forEach(e=>{e.selected&&s.push(e.selected)});var f=0;s.forEach(function(e){e.name&&(l.push([e.name,e.class,e.teacher,h(e.hours[0][0]).day(),h(e.hours[0][0]).format("HH:mm"),h(e.hours[0][1]).format("HH:mm")]),f+=e.credits),e.hours.length>1&&e.name&&u.push([e.name,e.class,e.teacher,h(e.hours[1][0]).day(),h(e.hours[1][0]).format("HH:mm"),h(e.hours[1][1]).format("HH:mm")])}),t.forEach(function(e){var t=!1;s.forEach(function(n){e==n.name&&(t=!0)}),t||_(e+" is impossible to fit to your importance order.")}),r([l,u,c,f,g])})})(e,d()("#courses_i").val().trim().toUpperCase(),d()("#uhours_i").val().trim()).then(e=>(function(e){d()(".mdl-layout__tab").each(e=>{0==e?(d()(".mdl-layout__tab-panel:eq("+e+")").toggleClass("is-active"),d()(".mdl-layout__tab:eq("+e+")").toggleClass("is-active")):1==e&&(d()(".mdl-layout__tab-panel:eq("+e+")").toggleClass("is-active"),d()(".mdl-layout__tab:eq("+e+")").toggleClass("is-active")),d()(".mdl-layout__tab:eq("+e+")").removeClass("hidden")}),d()("#mprogram").empty();for(var t=0;t<55;t++)d()("#mprogram").append(d()("<div>"));d()("#alternatives tbody").empty(),d()("#mainlist tbody").empty();var n=[],r=e[0].concat(e[1]);r.sort((e,t)=>e[0]+e[3]<t[0]+t[3]?-1:1).forEach(e=>{var t=d()("<tr>");e.forEach((e,n)=>{3==n&&(e=O.weekdays(!0)[e-1]),t.append(d()("<td>").html(e))}),d()("#mainlist tbody").append(t)}),r.forEach(e=>{var t=Number.parseInt(e[4].split(":")[0]),r=Number.parseInt(e[5].split(":")[0]);if(r-1>t)for(var o=1;o<r-t;o++){var a=[...e];a[4]=t+o+":40",a.push(!0),n.push(a)}}),r.concat(n).forEach(e=>{var t,n=d()("<div>",{class:"accent-color-"+(r.findIndex(t=>t[0]==e[0])+1)+"-gradient"}),o=Number.parseInt(e[4].split(":")[0]),a=o-8+(Number.parseInt(e[4].split(":")[1])<30?1:0),s=e[3]-1+5*a;e.length<=6?(t=e[1].indexOf(",")>0?e[1].substring(0,e[1].indexOf(",")):e[1],t=e[0]+"."+t):t="",n.append(d()("<span>",{class:"name"}).text(t)),d()("#mprogram > div:eq("+s+")").append(n)}),e[2].forEach(e=>{var t=d()("<tr>");e.forEach((e,n)=>{3==n&&(e=O.weekdays(!0)[e-1]),t.append(d()("<td>").html(e))}),d()("#alternatives tbody").append(t)}),d()("#errors").html(e[4].join("</br>")),d()(".mdl-layout-title").text("Course Program Generator ("+e[3]+" Credits)")})(e))}):alert("Enter a course!")})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/app.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/css-loader/index.js!./src/stylesheets/main.css":
+/*!************************************************************!*\
+  !*** ./node_modules/css-loader!./src/stylesheets/main.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "html,\nbody {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n\n.page-content {\n  padding: 20px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-family: sans-serif;\n  color: #525252;\n}\n\n.row > * {\n  margin-bottom: 5px;\n}\n\na {\n  text-decoration: none;\n  color: #cb3837;\n}\n\ntd {\n  text-align: center !important;\n}\n\n.mdl-chip {\n  margin: 5px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target) {
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
+/***/ "./src/app.js":
+/*!********************!*\
+  !*** ./src/app.js ***!
+  \********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _stylesheets_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/main.css */ "./src/stylesheets/main.css");
+/* harmony import */ var _stylesheets_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_main_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_context_menu_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/context_menu.js */ "./src/helpers/context_menu.js");
+/* harmony import */ var _helpers_external_links_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/external_links.js */ "./src/helpers/external_links.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _brain_process__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./brain/process */ "./src/brain/process.js");
+ // Small helpers you might want to keep
+
+
+
+
+
+
+const moment = __webpack_require__(/*! moment */ "moment");
+
+moment.locale("tr");
+jquery__WEBPACK_IMPORTED_MODULE_3___default()("#app").css("display", "block");
+jquery__WEBPACK_IMPORTED_MODULE_3___default()("#courses_i").on("keypress", event => {
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#courses").empty();
+  event.target.value.split(" ").forEach(i => {
+    if (i.includes(".")) {
+      var name = i.substring(0, i.indexOf("."));
+      var parent = jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+        class: "mdl-chip mdl-chip--contact"
+      });
+      parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+        class: "mdl-chip__contact mdl-color--blue-500 mdl-color-text--white"
+      }).html(name.toUpperCase()));
+      parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+        class: "mdl-chip__text"
+      }).html(i.substring(i.indexOf(".") + 1)));
+      jquery__WEBPACK_IMPORTED_MODULE_3___default()("#courses").append(parent);
+    }
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_3___default()("#uhours_i").on("keypress", event => {
+  var hours = [];
+  var weekdays = ["Mo", "Tu", "We", "Th", "Fr"];
+  var input = event.target.value.split(" ");
+
+  if (input.length % 2 == 0) {
+    input.forEach((v, index) => {
+      var i = v.substring(0, v.indexOf(","));
+      var clock = v.substring(v.indexOf(",") + 1);
+      var hi = hours.findIndex(vi => vi.i == i);
+
+      if (hi == -1) {
+        hours.push({
+          i: i,
+          clock: clock
+        });
+      } else {
+        hours[hi].clock = hours[hi].clock + " " + clock;
+      }
+    });
+  }
+
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#uhours").empty();
+  hours.forEach(val => {
+    var wi = weekdays[val.i - 1];
+    var hs = val.clock;
+    var parent = jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+      class: "mdl-chip mdl-chip--contact"
+    });
+    parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+      class: "mdl-chip__contact mdl-color--blue-500 mdl-color-text--white"
+    }).html(wi.toUpperCase()));
+    parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+      class: "mdl-chip__text"
+    }).html(hs));
+    jquery__WEBPACK_IMPORTED_MODULE_3___default()("#uhours").append(parent);
+  });
+});
+jquery__WEBPACK_IMPORTED_MODULE_3___default()("#start").on("click", () => {
+  if (jquery__WEBPACK_IMPORTED_MODULE_3___default()("#courses_i").val() != "") {
+    Object(_brain_process__WEBPACK_IMPORTED_MODULE_4__["getWorld"])().then(world => {
+      Object(_brain_process__WEBPACK_IMPORTED_MODULE_4__["getResult"])(world, jquery__WEBPACK_IMPORTED_MODULE_3___default()("#courses_i").val().trim().toUpperCase(), jquery__WEBPACK_IMPORTED_MODULE_3___default()("#uhours_i").val().trim()).then(tables => drawTable(tables));
+    });
+  } else {
+    alert("Enter a course!");
+  }
+});
+
+function drawTable(tables) {
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab").each(i => {
+    if (i == 0) {
+      jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab-panel:eq(" + i + ")").toggleClass("is-active");
+      jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab:eq(" + i + ")").toggleClass("is-active");
+    } else if (i == 1) {
+      jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab-panel:eq(" + i + ")").toggleClass("is-active");
+      jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab:eq(" + i + ")").toggleClass("is-active");
+    }
+
+    jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout__tab:eq(" + i + ")").removeClass("hidden");
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#mprogram").empty();
+
+  for (var i = 0; i < 5 * 11; i++) jquery__WEBPACK_IMPORTED_MODULE_3___default()("#mprogram").append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<div>"));
+
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#alternatives tbody").empty();
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#mainlist tbody").empty();
+  var pluss = [];
+  var m_plus_s = tables[0].concat(tables[1]);
+  m_plus_s.sort((x, y) => x[0] + x[3] < y[0] + y[3] ? -1 : 1).forEach(c => {
+    var parent = jquery__WEBPACK_IMPORTED_MODULE_3___default()("<tr>");
+    c.forEach((cc, i) => {
+      if (i == 3) cc = moment.weekdays(true)[cc - 1];
+      parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<td>").html(cc));
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_3___default()("#mainlist tbody").append(parent);
+  });
+  m_plus_s.forEach(c => {
+    var start = Number.parseInt(c[4].split(":")[0]);
+    var end = Number.parseInt(c[5].split(":")[0]);
+
+    if (end - 1 > start) {
+      for (var i = 1; i < end - start; i++) {
+        var nc = [...c];
+        nc[4] = start + i + ":40";
+        nc.push(true); // tells that this object doesn't need a name
+
+        pluss.push(nc);
+      }
+    }
+  });
+  m_plus_s.concat(pluss).forEach(c => {
+    var parent = jquery__WEBPACK_IMPORTED_MODULE_3___default()("<div>", {
+      class: "accent-color-" + (m_plus_s.findIndex(el => el[0] == c[0]) + 1) + "-gradient"
+    });
+    var start = Number.parseInt(c[4].split(":")[0]);
+    var indexday = start - 8 + (Number.parseInt(c[4].split(":")[1]) < 30 ? 1 : 0);
+    var index = c[3] - 1 + indexday * 5;
+    var class_name;
+
+    if (c.length <= 6) {
+      class_name = c[1].indexOf(",") > 0 ? c[1].substring(0, c[1].indexOf(",")) : c[1];
+      class_name = c[0] + "." + class_name;
+    } else {
+      class_name = "";
+    }
+
+    parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<span>", {
+      class: "name"
+    }).text(class_name));
+    jquery__WEBPACK_IMPORTED_MODULE_3___default()("#mprogram > div:eq(" + index + ")").append(parent);
+  });
+  tables[2].forEach(c => {
+    var parent = jquery__WEBPACK_IMPORTED_MODULE_3___default()("<tr>");
+    c.forEach((cc, i) => {
+      if (i == 3) cc = moment.weekdays(true)[cc - 1];
+      parent.append(jquery__WEBPACK_IMPORTED_MODULE_3___default()("<td>").html(cc));
+    });
+    jquery__WEBPACK_IMPORTED_MODULE_3___default()("#alternatives tbody").append(parent);
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()("#errors").html(tables[4].join("</br>"));
+  jquery__WEBPACK_IMPORTED_MODULE_3___default()(".mdl-layout-title").text("Course Program Generator (" + tables[3] + " Credits)");
+}
+
+/***/ }),
+
+/***/ "./src/brain/process.js":
+/*!******************************!*\
+  !*** ./src/brain/process.js ***!
+  \******************************/
+/*! exports provided: getWorld, getResult */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWorld", function() { return getWorld; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getResult", function() { return getResult; });
+const XLSX = __webpack_require__(/*! xlsx */ "xlsx");
+
+const moment = __webpack_require__(/*! moment */ "moment");
+
+const path = __webpack_require__(/*! path */ "path");
+
+const fs = __webpack_require__(/*! fs */ "fs");
+
+let directoryPath = path.join(__dirname, "bin");
+var worksheet = null;
+var errors = [];
+function getWorld(unit = false) {
+  var world = [];
+  return new Promise((resolve, reject) => {
+    if (unit) {
+      directoryPath = path.join(__dirname, "../app/bin");
+    }
+
+    fs.readdir(directoryPath, function (err, files) {
+      if (err) {
+        log("Catalogs must be placed in 'bin' folder");
+        reject();
+      }
+
+      files.forEach(function (file) {
+        if (file == ".DS_Store") return false;
+        var workbook = XLSX.readFile(path.join(directoryPath, file));
+        var data = workbook.SheetNames[0];
+        worksheet = workbook.Sheets[data];
+
+        for (var ii = 2; cell(0, ii) != undefined; ii++) {
+          var course = {
+            name: null,
+            credits: null,
+            class: null,
+            teacher: null,
+            corequisite: null,
+            hours: []
+          };
+          course.name = cell(0, ii) + "." + cell(1, ii);
+          course.credits = parseInt(cell(5, ii));
+          course.class = cell(2, ii);
+          course.teacher = cell(3, ii).lowerCaseAllWordsExceptFirstLetters(); //corequisite
+
+          if (cell(4, ii) && cell(4, ii) != "-") {
+            course.corequisite = [];
+
+            if (cell(4, ii).indexOf(" ve ") != -1) {
+              course.corequisite = cell(4, ii).split(" ve ");
+            } else {
+              course.corequisite = cell(4, ii).split(" and ");
+            }
+
+            course.corequisite = course.corequisite.map(item => {
+              return item.replace(" ", ".");
+            });
+          } //hours
+
+
+          var hours = cell(6, ii).split("\n");
+
+          for (var hour in hours) {
+            if (hours[hour] == "") continue;
+
+            try {
+              var hourOBJ = parseHourOBJ(hours[hour]);
+              if (course.hours.length > 0 && isEqual(hourOBJ, course.hours[course.hours.length - 1])) continue;
+              course.hours.push(hourOBJ);
+            } catch (ex) {
+              continue;
+            }
+          }
+
+          world.push(course);
+        }
+      });
+      resolve(world);
+    });
+  });
+}
+function getResult(world, input, unavailable_hours = "") {
+  return new Promise((resolve, reject) => {
+    var found = [];
+    var result = [];
+    errors = [];
+    unavailable_hours = unavailable_hours.split(" ");
+    input = input.split(" ");
+    unavailable_hours.forEach(function (el, i) {
+      if (i % 2 == 1) {
+        result.push({
+          name: null,
+          class: null,
+          hours: [[moment(unavailable_hours[i - 1], "d,HH:mm").valueOf(), moment(el, "d,HH:mm").valueOf()]]
+        });
+      }
+    }); //Show if anything is not found in the world
+
+    input.forEach(function (el) {
+      var f = false;
+      world.forEach(function (eli) {
+        if (el == eli.name) f = true;
+      });
+      if (!f) log(el + " not found.");
+    }); //Populate found
+
+    input.forEach(function (el, i) {
+      world.forEach(function (eli) {
+        if (eli.name == el.toUpperCase()) {
+          found.push(eli);
+
+          if (eli.corequisite) {
+            eli.corequisite.forEach(function (elii) {
+              world.forEach(function (eliii) {
+                if (eliii.name == elii) {
+                  found.push(eliii);
+                }
+              });
+            });
+          }
+        }
+      });
+    }); //Sort so that it is guarenteed that A section will be recommended first
+
+    found.sort((x, y) => x.class < y.class ? -1 : 1); //Populate qualifiers with candidates.
+
+    var qualifiers = [];
+    found.forEach(function (currentCourse) {
+      var qualifierOBJ = {
+        name: currentCourse.name,
+        selected: null,
+        collidesWith: [],
+        candidates: [currentCourse],
+        alternatives: []
+      };
+      var s = qualifiers.findIndex(q => {
+        return q.name == currentCourse.name;
+      });
+
+      if (s != -1) {
+        qualifiers[s].candidates.push(currentCourse);
+      } else {
+        qualifiers.push(qualifierOBJ);
+      }
+    }); //Create beautiful result
+
+    qualifiers.forEach((qu, i) => {
+      try {
+        qu.candidates.forEach(quc => {
+          var eligible = true; //Check if it collides with unavailable hours
+
+          result.forEach(res => {
+            res.hours.forEach(U => {
+              quc.hours.forEach(I => {
+                if (isColliding(U, I)) eligible = false;
+              });
+            });
+          });
+
+          if (eligible) {
+            //Try to fit on the first try
+            //If it fails gather which courses it collides with
+            qualifiers.forEach((qi, iii) => {
+              if (qi.selected) {
+                qi.selected.hours.forEach(U => {
+                  quc.hours.forEach(I => {
+                    if (isColliding(U, I)) {
+                      if (qualifiers[i].collidesWith.findIndex(ci => {
+                        return ci.name == qi.name;
+                      }) == -1) {
+                        qualifiers[i].collidesWith.push(qi);
+                      }
+
+                      eligible = false;
+                    }
+                  });
+                });
+              } //If failed, lastly try to change the classes that it collides with their candidates
+
+
+              if (!eligible && iii == qualifiers.length - 1) {
+                try {
+                  qu.collidesWith.forEach(col => {
+                    log(quc.name + "." + quc.class + " collides with " + col.name + "." + col.selected.class);
+
+                    if (col.candidates.length > 1) {
+                      log("Trying to change " + col.name + " with a different class");
+                      col.candidates.forEach(colcan => {
+                        if (col.selected.class != colcan.class) {
+                          var inner_eligible = true;
+                          qualifiers.forEach(qi => {
+                            if (qi.selected) {
+                              qi.selected.hours.forEach(U => {
+                                colcan.hours.forEach(I => {
+                                  if (isColliding(U, I)) {
+                                    inner_eligible = false;
+                                  }
+                                });
+                              });
+                            }
+                          });
+
+                          if (inner_eligible) {
+                            //Okay so, we can move colliding class to another
+                            //But if we assume the new class in place
+                            //Can we place current class into the new place (quc)
+                            //First find index of col on qualifier and change class
+                            //But save original class
+                            var original_index = qualifiers.findIndex(fi => {
+                              return fi.name == col.name;
+                            });
+                            var original_selected = col.selected;
+                            qualifiers[original_index].selected = colcan; //Check if quc or colcan collides with unavailable hours
+
+                            result.forEach(res => {
+                              res.hours.forEach(U => {
+                                quc.hours.forEach(I => {
+                                  if (isColliding(U, I)) inner_eligible = false;
+                                });
+                                colcan.hours.forEach(I => {
+                                  if (isColliding(U, I)) inner_eligible = false;
+                                });
+                              });
+                            }); //Test for other courses
+
+                            qualifiers.forEach(qi => {
+                              if (qi.selected) {
+                                qi.selected.hours.forEach(U => {
+                                  quc.hours.forEach(I => {
+                                    if (isColliding(U, I)) {
+                                      inner_eligible = false;
+                                    }
+                                  });
+                                });
+                              }
+                            });
+
+                            if (inner_eligible) {
+                              log("Wuhuu, we can change it with " + colcan.name + "." + colcan.class);
+                              log();
+                              eligible = true;
+                              throw BreakException;
+                            } else {
+                              qualifiers[original_index].selected = original_selected;
+                            }
+                          }
+                        }
+                      });
+                    } else {
+                      log("There is nothing we can do!");
+                      throw BreakException;
+                    }
+
+                    log("Failed!\n");
+                  });
+                } catch (ex) {}
+              }
+            });
+          }
+
+          if (eligible) {
+            if (!qualifiers[i].selected) qualifiers[i].selected = quc;
+            throw BreakException;
+          }
+        });
+      } catch (ex) {}
+    }); //Corequisite check, if fails remove all parent and children.
+
+    qualifiers.forEach(function (q, i) {
+      if (q.selected && q.selected.corequisite) {
+        var parents = q.selected.corequisite;
+        var eligible = false;
+        parents.forEach(function (p) {
+          qualifiers.forEach(function (qf) {
+            if (qf.selected) {
+              if (p == qf.name) eligible = true;
+            }
+          });
+        });
+
+        if (!eligible) {
+          qualifiers[i].selected = null;
+        }
+      }
+    }); //Add alternative classes
+
+    var alternatives = [];
+    var table = [];
+    var excess = [];
+    qualifiers.forEach(q => {
+      q.candidates.forEach(qc => {
+        var eligible = true;
+
+        try {
+          qualifiers.forEach(iq => {
+            //Has selected course
+            if (iq.selected) {
+              iq.selected.hours.forEach(U => {
+                qc.hours.forEach(I => {
+                  if (iq.name == qc.name && isEqual(U, I)) {
+                    //Check if same name and same hours
+                    eligible = iq.selected.class != qc.class;
+                  } else if (!isColliding(U, I)) {
+                    //Check if it collides with any other courses
+                    eligible = true;
+                  } else {
+                    eligible = false;
+                  }
+
+                  result.forEach(res => {
+                    res.hours.forEach(U => {
+                      qc.hours.forEach(I => {
+                        if (isColliding(U, I)) eligible = false;
+                      });
+                    });
+                  });
+                  if (!eligible) throw BreakException();
+                });
+              });
+            }
+          });
+        } catch (ex) {}
+
+        if (eligible) {
+          alternatives.push([qc.name, qc.class, qc.teacher, moment(qc.hours[0][0]).day(), moment(qc.hours[0][0]).format("HH:mm"), moment(qc.hours[0][1]).format("HH:mm")]);
+        }
+      });
+    });
+    qualifiers.forEach(q => {
+      if (q.selected) result.push(q.selected);
+    }); //Print results
+
+    var total_credits = 0;
+    result.forEach(function (el) {
+      if (el.name) {
+        table.push([el.name, el.class, el.teacher, moment(el.hours[0][0]).day(), moment(el.hours[0][0]).format("HH:mm"), moment(el.hours[0][1]).format("HH:mm")]);
+        total_credits += el.credits;
+      }
+
+      if (el.hours.length > 1) {
+        if (el.name) {
+          excess.push([el.name, el.class, el.teacher, moment(el.hours[1][0]).day(), moment(el.hours[1][0]).format("HH:mm"), moment(el.hours[1][1]).format("HH:mm")]);
+        }
+      }
+    }); //Check if anything has failed
+
+    input.forEach(function (eli) {
+      var f = false;
+      result.forEach(function (el) {
+        if (eli == el.name) f = true;
+      });
+      if (!f) log(eli + " is impossible to fit to your importance order.");
+    });
+    resolve([table, excess, alternatives, total_credits, errors]);
+  });
+}
+
+function isColliding(a, b) {
+  return a[0] <= b[0] && b[0] <= a[1] || b[0] <= a[0] && a[0] <= b[1];
+}
+
+String.prototype.lowerCaseAllWordsExceptFirstLetters = function () {
+  var arr = this.split(" ");
+  arr.forEach(function (word, i) {
+    arr[i] = word.charAt(0) + word.slice(1).toLowerCase();
+  });
+  return arr.join(" ");
+};
+
+function cell(i, ii) {
+  var read_cell = ["A", "B", "C", "G", "I", "F", "L"];
+  var desired_cell = worksheet[read_cell[i] + ii];
+  return desired_cell ? desired_cell.v : undefined;
+}
+
+function isEqual(a, b) {
+  if (a == undefined || b == undefined) return false;
+  return a[0] == b[0] && a[1] == b[1];
+}
+
+function parseHourOBJ(origin) {
+  moment.locale("tr");
+  var hourOBJ = [null, null];
+  var day = origin.split(" | ")[0];
+  hourOBJ[0] = origin.split(" | ")[1].split(" - ")[0].trim();
+  hourOBJ[1] = origin.split(" | ")[1].split(" - ")[1].trim();
+  day = moment.weekdays(true).indexOf(day);
+  hourOBJ[0] = moment("1," + hourOBJ[0], "d,HH:mm").add(day, "d").valueOf();
+  hourOBJ[1] = moment("1," + hourOBJ[1], "d,HH:mm").add(day, "d").valueOf();
+  return hourOBJ;
+}
+
+function log(msg) {
+  errors.push(msg);
+}
+
+/***/ }),
+
+/***/ "./src/helpers/context_menu.js":
+/*!*************************************!*\
+  !*** ./src/helpers/context_menu.js ***!
+  \*************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);
+// This gives you default context menu (cut, copy, paste)
+// in all input fields and textareas across your app.
+
+const Menu = electron__WEBPACK_IMPORTED_MODULE_0__["remote"].Menu;
+const MenuItem = electron__WEBPACK_IMPORTED_MODULE_0__["remote"].MenuItem;
+
+const isAnyTextSelected = () => {
+  return window.getSelection().toString() !== "";
+};
+
+const cut = new MenuItem({
+  label: "Cut",
+  click: () => {
+    document.execCommand("cut");
+  }
+});
+const copy = new MenuItem({
+  label: "Copy",
+  click: () => {
+    document.execCommand("copy");
+  }
+});
+const paste = new MenuItem({
+  label: "Paste",
+  click: () => {
+    document.execCommand("paste");
+  }
+});
+const normalMenu = new Menu();
+normalMenu.append(copy);
+const textEditingMenu = new Menu();
+textEditingMenu.append(cut);
+textEditingMenu.append(copy);
+textEditingMenu.append(paste);
+document.addEventListener("contextmenu", event => {
+  switch (event.target.nodeName) {
+    case "TEXTAREA":
+    case "INPUT":
+      event.preventDefault();
+      textEditingMenu.popup(electron__WEBPACK_IMPORTED_MODULE_0__["remote"].getCurrentWindow());
+      break;
+
+    default:
+      if (isAnyTextSelected()) {
+        event.preventDefault();
+        normalMenu.popup(electron__WEBPACK_IMPORTED_MODULE_0__["remote"].getCurrentWindow());
+      }
+
+  }
+}, false);
+
+/***/ }),
+
+/***/ "./src/helpers/external_links.js":
+/*!***************************************!*\
+  !*** ./src/helpers/external_links.js ***!
+  \***************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);
+// Convenient way for opening links in external browser, not in the app.
+// Useful especially if you have a lot of links to deal with.
+//
+// Usage:
+//
+// Every link with class ".js-external-link" will be opened in external browser.
+// <a class="js-external-link" href="http://google.com">google</a>
+//
+// The same behaviour for many links can be achieved by adding
+// this class to any parent tag of an anchor tag.
+// <p class="js-external-link">
+//    <a href="http://google.com">google</a>
+//    <a href="http://bing.com">bing</a>
+// </p>
+
+
+const supportExternalLinks = event => {
+  let href;
+  let isExternal = false;
+
+  const checkDomElement = element => {
+    if (element.nodeName === "A") {
+      href = element.getAttribute("href");
+    }
+
+    if (element.classList.contains("js-external-link")) {
+      isExternal = true;
+    }
+
+    if (href && isExternal) {
+      electron__WEBPACK_IMPORTED_MODULE_0__["shell"].openExternal(href);
+      event.preventDefault();
+    } else if (element.parentElement) {
+      checkDomElement(element.parentElement);
+    }
+  };
+
+  checkDomElement(event.target);
+};
+
+document.addEventListener("click", supportExternalLinks, false);
+
+/***/ }),
+
+/***/ "./src/stylesheets/main.css":
+/*!**********************************!*\
+  !*** ./src/stylesheets/main.css ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!./main.css */ "./node_modules/css-loader/index.js!./src/stylesheets/main.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "electron":
+/*!***************************!*\
+  !*** external "electron" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("electron");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jquery" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("jquery");
+
+/***/ }),
+
+/***/ "moment":
+/*!*************************!*\
+  !*** external "moment" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+
+/***/ "xlsx":
+/*!***********************!*\
+  !*** external "xlsx" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("xlsx");
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=app.js.map

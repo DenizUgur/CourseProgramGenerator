@@ -4,7 +4,7 @@
 ![GitHub Release Date](https://img.shields.io/github/release-date/DenizUgur/CourseProgramGenerator)
 ![GitHub All Releases](https://img.shields.io/github/downloads/DenizUgur/CourseProgramGenerator/total?color=green)
 ![GitHub repo size](https://img.shields.io/github/repo-size/DenizUgur/CourseProgramGenerator)
-[![Coverage](https://img.shields.io/badge/coverage-79.33%-yellow.svg)](#)
+[![Coverage](https://img.shields.io/badge/coverage-79.33%25-yellow?style=flat)](#)
 
 *Course Program Generator, easily create semester schedule*
 
