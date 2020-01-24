@@ -6,6 +6,9 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/DenizUgur/CourseProgramGenerator)
 [![Coverage](https://img.shields.io/badge/coverage-79.33%25-yellow?style=flat)](#)
 
+**[Download latest version][4]**
+----------------
+
 *Course Program Generator, easily create semester schedule*
 
 Simply type the courses you want and a schedule optimized for the courses you want will be generated in seconds. Also alternative classes will be available if you would like to see some other options for your schedule.
@@ -34,6 +37,7 @@ Releases will be numbered with the following format: `<major>.<minor>.<patch>` a
 
 For more information on SemVer, please visit http://semver.org/.
 
-[1]: https://github.com/DenizUgur/ninegagsaver/issues/new
-[2]: https://github.com/DenizUgur/ninegagsaver/issues?state=open
-[3]: https://github.com/DenizUgur/ninegagsaver/issues?state=closed
+[1]: https://github.com/DenizUgur/CourseProgramGenerator/issues/new
+[2]: https://github.com/DenizUgur/CourseProgramGenerator/issues?state=open
+[3]: https://github.com/DenizUgur/CourseProgramGenerator/issues?state=closed
+[4]: https://github.com/DenizUgur/CourseProgramGenerator/releases/latest
