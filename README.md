@@ -1,5 +1,6 @@
 # Course Program Generator
 [![Status](https://img.shields.io/badge/status-working-brightgreen.svg?style=flat)](#)
+[![Actions Status](https://github.com/DenizUgur/CourseProgramGenerator/workflows/version-release/badge.svg)](https://github.com/DenizUgur/CourseProgramGenerator/actions)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/DenizUgur/CourseProgramGenerator)
 ![GitHub Release Date](https://img.shields.io/github/release-date/DenizUgur/CourseProgramGenerator)
 ![GitHub All Releases](https://img.shields.io/github/downloads/DenizUgur/CourseProgramGenerator/total?color=green)
