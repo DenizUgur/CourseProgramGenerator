@@ -1,0 +1,97 @@
+on:
+  push:
+    tags:
+    - 'v*'
+
+name: Release Version
+
+jobs:
+  build:
+    name: Release Version
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+          os: [ubuntu-latest, macos-latest, windows-latest]
+          include:
+            - os: ubuntu-latest
+              create: true
+              build: false
+            - os: macos-latest
+              create: false
+              build: true
+            - os: windows-latest
+              create: false
+              build: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - if: matrix.create
+        name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - if: matrix.create
+        name: Output Release URL File
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
+      - if: matrix.create
+        name: Save Release URL File for publish
+        uses: actions/upload-artifact@v1
+        with:
+          name: release_url
+          path: release_url.txt
+      - name: Install Node.js, NPM and Yarn
+        if: matrix.build
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Build project
+        if: matrix.build
+        run: |
+          npm install
+          npm run prerelease
+      - name: Build Electron app
+        if: matrix.build
+        id: build_electron
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Load Release URL File from release job
+        if: matrix.build
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
+      - name: Get Release Upload URL
+        if: matrix.build
+        id: get_release_info
+        shell: bash
+        run: |
+          value=`cat release_url/release_url.txt`
+          echo ::set-output name=upload_url::$value
+      - if: startsWith(matrix.os, 'macos') && matrix.build
+        name: Upload Mac Release
+        id: upload-release-asset-mac
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          asset_path: ./dist/Course Program Generator-mac.dmg
+          asset_name: "CourseProgramGenerator.dmg"
+          asset_content_type: application/apple-diskimage
+      - if: startsWith(matrix.os, 'windows') && matrix.build
+        name: Upload Windows Release
+        id: upload-release-asset-windows
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          asset_path: ./dist/Course Program Generator-win.exe
+          asset_name: "CourseProgramGenerator.exe"
+          asset_content_type: application/octet-stream

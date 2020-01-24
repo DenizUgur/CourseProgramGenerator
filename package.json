@@ -18,6 +18,7 @@
     "directories": {
       "buildResources": "resources"
     },
+    "artifactName": "${productName}-${os}.${ext}",
     "publish": null
   },
   "nyc": {
@@ -35,9 +36,8 @@
     "coverage-report": "nyc report --reporter=html",
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
-    "rwin": "webpack --config=build/webpack.app.config.js --env=production && electron-builder --win",
-    "rmac": "webpack --config=build/webpack.app.config.js --env=production && electron-builder --mac",
-    "release": "npm run test && npm run rwin && npm run rmac"
+    "prerelease": "webpack --config=build/webpack.app.config.js --env=production",
+    "release": "npm run test && npm run prerelease && electron-builder"
   },
   "dependencies": {
     "fs": "0.0.1-security",
@@ -56,7 +56,7 @@
     "chai-as-promised": "^7.1.1",
     "css-loader": "^1.0.0",
     "electron": "2.0.8",
-    "electron-builder": "^20.15.1",
+    "electron-builder": "22.2.0",
     "electron-mocha": "^6.0.4",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "mocha": "^5.2.0",
