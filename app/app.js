@@ -706,6 +706,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const {
+  remote
+} = __webpack_require__(/*! electron */ "electron");
+
+const request = __webpack_require__(/*! request */ "request");
+
+const dialog = remote.dialog;
+let WIN = remote.getCurrentWindow();
+const options = {
+  url: "https://api.github.com/repos/DenizUgur/CourseProgramGenerator/releases/latest",
+  headers: {
+    "User-Agent": "Mozilla 5.0"
+  }
+};
+request(options, function (error, response, body) {
+  var version = JSON.parse(body).tag_name.substring(1);
+
+  if (version != process.env.npm_package_version) {
+    let options = {};
+    options.buttons = ["Open Download Page", "Cancel"];
+    options.title = "Update Available";
+    options.message = "Newer version v" + version + " available";
+    dialog.showMessageBox(WIN, options, (res, checked) => {
+      if (res == 0) {
+        __webpack_require__(/*! electron */ "electron").shell.openExternal("https://github.com/DenizUgur/CourseProgramGenerator/releases/latest");
+      }
+    });
+  }
+});
+
 const moment = __webpack_require__(/*! moment */ "moment");
 
 moment.locale("tr");
@@ -930,9 +960,7 @@ function getWorld() {
               var hourOBJ = parseHourOBJ(hours[hour]);
               if (course.hours.length > 0 && isEqual(hourOBJ, course.hours[course.hours.length - 1])) continue;
               course.hours.push(hourOBJ);
-            } catch (ex) {
-              continue;
-            }
+            } catch (ex) {}
           }
 
           world.push(course);
@@ -1460,6 +1488,17 @@ module.exports = require("moment");
 /***/ (function(module, exports) {
 
 module.exports = require("path");
+
+/***/ }),
+
+/***/ "request":
+/*!**************************!*\
+  !*** external "request" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("request");
 
 /***/ }),
 

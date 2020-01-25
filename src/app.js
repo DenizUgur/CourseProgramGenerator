@@ -7,6 +7,35 @@ import "./helpers/external_links.js";
 import $ from "jquery";
 import { getWorld, getResult } from "./brain/process";
 
+const { remote } = require("electron");
+const request = require("request");
+const dialog = remote.dialog;
+
+let WIN = remote.getCurrentWindow();
+
+const options = {
+  url:
+    "https://api.github.com/repos/DenizUgur/CourseProgramGenerator/releases/latest",
+  headers: {
+    "User-Agent": "Mozilla 5.0"
+  }
+};
+request(options, function(error, response, body) {
+  var version = JSON.parse(body).tag_name.substring(1);
+  if (version != process.env.npm_package_version) {
+    let options = {};
+    options.buttons = ["Open Download Page", "Cancel"];
+    options.title = "Update Available";
+    options.message = "Newer version v" + version + " available";
+
+    dialog.showMessageBox(WIN, options, (res, checked) => {
+      if (res == 0) {
+        require('electron').shell.openExternal("https://github.com/DenizUgur/CourseProgramGenerator/releases/latest");
+      }
+    });
+  }
+});
+
 const moment = require("moment");
 moment.locale("tr");
 
