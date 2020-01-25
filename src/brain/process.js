@@ -64,9 +64,7 @@ export function getWorld() {
               )
                 continue;
               course.hours.push(hourOBJ);
-            } catch (ex) {
-              continue;
-            }
+            } catch (ex) {}
           }
           world.push(course);
         }
@@ -109,6 +107,9 @@ export function getResult(world, input, unavailable_hours = "") {
       if (!f) log(el + " not found.");
     });
 
+    //Sort so that it is guarenteed that A section will be recommended first
+    world.sort((x, y) => (x.class < y.class ? -1 : 1));
+
     //Populate found
     input.forEach(function(el, i) {
       world.forEach(function(eli) {
@@ -126,8 +127,6 @@ export function getResult(world, input, unavailable_hours = "") {
         }
       });
     });
-    //Sort so that it is guarenteed that A section will be recommended first
-    found.sort((x, y) => (x.class < y.class ? -1 : 1));
 
     //Populate qualifiers with candidates.
     var qualifiers = [];

@@ -875,12 +875,10 @@ const fs = __webpack_require__(/*! fs */ "fs");
 let directoryPath = path.join(__dirname, "bin");
 var worksheet = null;
 var errors = [];
-function getWorld(unit = false) {
+function getWorld() {
   var world = [];
   return new Promise((resolve, reject) => {
-    if (unit) {
-      directoryPath = path.join(__dirname, "../app/bin");
-    }
+    if (false) {}
 
     fs.readdir(directoryPath, function (err, files) {
       if (err) {
@@ -967,7 +965,9 @@ function getResult(world, input, unavailable_hours = "") {
         if (el == eli.name) f = true;
       });
       if (!f) log(el + " not found.");
-    }); //Populate found
+    }); //Sort so that it is guarenteed that A section will be recommended first
+
+    world.sort((x, y) => x.class < y.class ? -1 : 1); //Populate found
 
     input.forEach(function (el, i) {
       world.forEach(function (eli) {
@@ -985,9 +985,7 @@ function getResult(world, input, unavailable_hours = "") {
           }
         }
       });
-    }); //Sort so that it is guarenteed that A section will be recommended first
-
-    found.sort((x, y) => x.class < y.class ? -1 : 1); //Populate qualifiers with candidates.
+    }); //Populate qualifiers with candidates.
 
     var qualifiers = [];
     found.forEach(function (currentCourse) {

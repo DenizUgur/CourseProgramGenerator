@@ -93,7 +93,7 @@
 /*! exports provided: name, description, default */
 /***/ (function(module) {
 
-module.exports = {"name":"development","description":"Add here any environment specific stuff you like."};
+module.exports = JSON.parse("{\"name\":\"development\",\"description\":\"Add here any environment specific stuff you like.\"}");
 
 /***/ }),
 
@@ -163,8 +163,7 @@ electron__WEBPACK_IMPORTED_MODULE_2__["app"].on("ready", () => {
     slashes: true
   }));
 
-  if (env__WEBPACK_IMPORTED_MODULE_6__.name === "development") {
-    mainWindow.openDevTools();
+  if (env__WEBPACK_IMPORTED_MODULE_6__.name === "development") {//mainWindow.openDevTools();
   }
 });
 electron__WEBPACK_IMPORTED_MODULE_2__["app"].on("window-all-closed", () => {
