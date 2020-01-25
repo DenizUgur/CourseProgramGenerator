@@ -7,11 +7,11 @@ let directoryPath = path.join(__dirname, "bin");
 var worksheet = null;
 var errors = [];
 
-export function getWorld(unit = false) {
+export function getWorld() {
   var world = [];
   return new Promise((resolve, reject) => {
-    if (unit) {
-      directoryPath = path.join(__dirname, "../app/bin");
+    if (process.env.NODE_ENV === 'test') {
+      directoryPath = path.join(__dirname, "../../app/bin");
     }
     fs.readdir(directoryPath, function(err, files) {
       if (err) {

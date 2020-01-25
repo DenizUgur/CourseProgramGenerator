@@ -1,11 +1,11 @@
 # Course Program Generator
 [![Status](https://img.shields.io/badge/status-working-brightgreen.svg?style=flat)](#)
-![Release Version](https://github.com/DenizUgur/CourseProgramGenerator/workflows/Release%20Version/badge.svg)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/DenizUgur/CourseProgramGenerator)
-![GitHub Release Date](https://img.shields.io/github/release-date/DenizUgur/CourseProgramGenerator)
-![GitHub All Releases](https://img.shields.io/github/downloads/DenizUgur/CourseProgramGenerator/total?color=green)
-![GitHub repo size](https://img.shields.io/github/repo-size/DenizUgur/CourseProgramGenerator)
-[![Coverage](https://img.shields.io/badge/coverage-79.33%25-yellow?style=flat)](#)
+[![Release Version](https://github.com/DenizUgur/CourseProgramGenerator/workflows/Release%20Version/badge.svg)](https://github.com/DenizUgur/CourseProgramGenerator/actions)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/DenizUgur/CourseProgramGenerator)](#)
+[![GitHub Release Date](https://img.shields.io/github/release-date/DenizUgur/CourseProgramGenerator)](https://github.com/DenizUgur/CourseProgramGenerator/releases)
+[![GitHub All Releases](https://img.shields.io/github/downloads/DenizUgur/CourseProgramGenerator/total?color=green)](https://github.com/DenizUgur/CourseProgramGenerator/releases)
+[![GitHub repo size](https://img.shields.io/github/repo-size/DenizUgur/CourseProgramGenerator)](#)
+[![Coverage Status](https://coveralls.io/repos/github/DenizUgur/CourseProgramGenerator/badge.svg?branch=master)](https://coveralls.io/github/DenizUgur/CourseProgramGenerator?branch=master)
 
 **[Download latest version][4]**
 ----------------

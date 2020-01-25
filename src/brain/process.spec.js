@@ -5,15 +5,26 @@ chai.should();
 
 import { getResult, getWorld } from "./process";
 let world;
-getWorld(true).then(w => (world = w));
 
 async function test(input, uhours = "", size = false) {
-  return getResult(world, input, uhours).then(tables => {
-    if (size) {
-      return tables[0].length;
-    }
-    return tables[0][0][0];
-  });
+  if (world == undefined) {
+    return getWorld().then(w => {
+      world = w;
+      return getResult(world, input, uhours).then(tables => {
+        if (size) {
+          return tables[0].length;
+        }
+        return tables[0][0][0];
+      });
+    });
+  } else {
+    return getResult(world, input, uhours).then(tables => {
+      if (size) {
+        return tables[0].length;
+      }
+      return tables[0][0][0];
+    });
+  }
 }
 
 describe("Algorithm Test", () => {
