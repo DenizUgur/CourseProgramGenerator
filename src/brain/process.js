@@ -117,7 +117,7 @@ export function getResult(world, input, unavailable_hours = "") {
           if (eli.corequisite) {
             eli.corequisite.forEach(function(elii) {
               world.forEach(function(eliii) {
-                if (eliii.name == elii) {
+                if (eliii.name.replace(".", "") == elii || eliii.name == elii) {
                   found.push(eliii);
                 }
               });
@@ -306,7 +306,7 @@ export function getResult(world, input, unavailable_hours = "") {
         parents.forEach(function(p) {
           qualifiers.forEach(function(qf) {
             if (qf.selected) {
-              if (p == qf.name) eligible = true;
+              if (p == qf.name.replace(".", "") || p == qf.name) eligible = true;
             }
           });
         });
