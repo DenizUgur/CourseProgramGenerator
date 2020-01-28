@@ -5,7 +5,7 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/DenizUgur/CourseProgramGenerator)](https://github.com/DenizUgur/CourseProgramGenerator/releases)
 [![GitHub All Releases](https://img.shields.io/github/downloads/DenizUgur/CourseProgramGenerator/total?color=green)](https://github.com/DenizUgur/CourseProgramGenerator/releases)
 [![GitHub repo size](https://img.shields.io/github/repo-size/DenizUgur/CourseProgramGenerator)](#)
-[![Coverage Status](https://coveralls.io/repos/github/DenizUgur/CourseProgramGenerator/badge.svg?branch=master)](https://coveralls.io/github/DenizUgur/CourseProgramGenerator?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/DenizUgur/CourseProgramGenerator/badge.svg?branch=master)](https://coveralls.io/github/DenizUgur/CourseProgramGenerator?branch=master&service=github)
 
 **[Download latest version][4]**
 ----------------
