@@ -22,11 +22,11 @@ const options = {
 };
 request(options, function(error, response, body) {
   var version = JSON.parse(body).tag_name.substring(1);
-  if (version != process.env.npm_package_version) {
+  if (version != remote.app.getVersion()) {
     let options = {};
     options.buttons = ["Open Download Page", "Cancel"];
     options.title = "Update Available";
-    options.message = "Newer version v" + version + " available";
+    options.message = "Newer version v" + version + " available. Current version: v" + remote.app.getVersion();
 
     dialog.showMessageBox(WIN, options, (res, checked) => {
       if (res == 0) {
