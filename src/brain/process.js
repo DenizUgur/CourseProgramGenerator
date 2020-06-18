@@ -11,7 +11,7 @@ export function getWorld() {
   var world = [];
   return new Promise((resolve, reject) => {
     if (process.env.NODE_ENV === 'test') {
-      directoryPath = path.join(__dirname, "../../app/bin");
+      directoryPath = path.join(__dirname, "../../app/archive/2019-2020 Bahar");
     }
     fs.readdir(directoryPath, function(err, files) {
       if (err) {
