@@ -19,9 +19,9 @@ jobs:
       with:
         node-version: 10.x
 
-    - name: npm install, npm run coverage
+    - name: npm ci, npm run coverage
       run: |
-        npm install
+        npm ci
         npm run coverage
 
     - name: Coveralls
