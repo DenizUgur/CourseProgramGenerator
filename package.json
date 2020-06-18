@@ -2,7 +2,7 @@
   "name": "courseprogramgen",
   "productName": "Course Program Generator",
   "description": "Automated program generator with alternatives",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "private": true,
   "author": "Deniz Uğur <deniz343@gmail.com>",
   "copyright": "© 2020, Deniz",
@@ -39,7 +39,7 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "fs-jetpack": "^2.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "request": "^2.88.2",
@@ -66,7 +66,7 @@
     "spectron": "^3.8.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.0.4",
+    "webpack-cli": "^3.3.12",
     "webpack-merge": "^4.1.3",
     "webpack-node-externals": "^1.7.2"
   }
