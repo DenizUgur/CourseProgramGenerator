@@ -138,13 +138,6 @@ temp/
 
 # End of https://www.gitignore.io/api/node,macos
 
-# Other
-app/archive/*
-!app/archive/2019-2020 Bahar
-
-.jshintrc
-
-
 # Created by https://www.toptal.com/developers/gitignore/api/react
 # Edit at https://www.toptal.com/developers/gitignore?templates=react
 
@@ -166,3 +159,8 @@ sketch
 build
 
 # End of https://www.toptal.com/developers/gitignore/api/react
+
+# Other
+.jshintrc
+.prettierrc
+__mocks__
