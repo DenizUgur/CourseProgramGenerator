@@ -53,7 +53,7 @@ jobs:
       - name: Build project
         if: matrix.build
         run: |
-          npm install
+          npm ci
           npm run prerelease
       - name: Build Electron app
         if: matrix.build
