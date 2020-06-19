@@ -1,0 +1,19 @@
+.schedule {
+	height: 80vh;
+}
+
+.grid {
+	flex: 1;
+
+	* {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		border: 1px dashed rgba(255, 255, 255, 0.13);
+	}
+}
+
+.controls {
+	height: 20vh;
+}
