@@ -11,7 +11,7 @@ export default function Event(props: any) {
 				gridColumn: `track-${day}`,
 				gridRow: `time-${timeStart} / time-${timeEnd}`,
 			}}>
-			{props.children}
+			{timeStart}
 		</Box>
 	);
 }

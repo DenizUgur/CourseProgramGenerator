@@ -1,0 +1,12 @@
+.grid {
+	flex: 1;
+	user-select: none;
+
+	* {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		border: 1px dashed rgba(125, 125, 125, 0.5);
+	}
+}

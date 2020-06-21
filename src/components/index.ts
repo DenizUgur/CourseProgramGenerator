@@ -1,3 +1,5 @@
-import Event from './Event';
+import Event from './Event/Event';
+import Schedule from './Schedule/Schedule';
+import Controls from './Controls/Controls';
 
-export { Event };
+export { Event, Schedule, Controls };

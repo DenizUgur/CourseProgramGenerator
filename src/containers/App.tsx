@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './App.module.scss';
-import { Main, Box, Grommet, Clock, Grid } from 'grommet';
-import { grommet } from 'grommet/themes';
-import { deepMerge } from 'grommet/utils';
-import moment from 'moment';
-import { Event } from '../components';
 
-const theme = deepMerge(grommet, {
+import { Schedule, Controls } from '../components';
+
+import { Main, Box, Grommet } from 'grommet';
+import { deepMerge } from 'grommet/utils';
+import { grommet } from 'grommet/themes';
+
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+
+const themeGrommet = deepMerge(grommet, {
 	global: {
 		colors: {
 			background: {
-				dark: 'dark-1',
+				dark: '#242424',
+				light: '#e2e2e2',
+			},
+			brand: {
+				dark: '#333333',
 			},
 		},
 		font: {
-			family: 'Roboto',
+			family: 'Quicksand',
 			size: '18px',
 			height: '20px',
 		},
@@ -22,102 +29,70 @@ const theme = deepMerge(grommet, {
 });
 
 function App() {
-	let dayTracks = Array(9).fill(null);
+	const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
 
-	const calcArea = (x: string, y: string) =>
-		Math.abs(moment(x, 'HHmm').diff(moment(y, 'HHmm'), 'm')) / 30;
-
-	const testData = [
-		{ day: 1, timeStart: '0830', timeEnd: '1130' },
-		{ day: 2, timeStart: '1030', timeEnd: '1230' },
-		{ day: 4, timeStart: '1230', timeEnd: '1530' },
-	];
-
-	const totalUsedArea = testData.reduce(
-		(accumulator, { timeStart, timeEnd }) => {
-			return accumulator + calcArea(timeStart, timeEnd);
-		},
-		0
+	const themeMui = React.useMemo(
+		() =>
+			createMuiTheme({
+				palette: {
+					type: themeMode,
+					primary: {
+						main: '#cc0000',
+					},
+				},
+				typography: {
+					fontFamily: 'Quicksand',
+				},
+			}),
+		[themeMode]
 	);
 
-	const timeCount = 21;
-	let timeSlots = Array(timeCount).fill(null);
-	let startTime = moment('0830', 'HHmm');
-
-	dayTracks = dayTracks.map((_: any, index: number) => {
-		if (index === 0) return `[times] 4em`;
-		if (index === 1) return `[track-${index}-start] 1fr`;
-		if (index === 8) return `[track-${index - 1}-end]`;
-		return `[track-${index - 1}-end track-${index}-start] 1fr`;
-	});
-
-	timeSlots = timeSlots.map((_: any, index: number) => {
-		if (index === 0) return `[tracks] 10vh`;
-		return `[time-${moment(startTime)
-			.add(30 * (index - 1), 'm')
-			.format('HHmm')}] 1fr`;
-	});
+	const [data, setData] = useState(/*[
+		{
+			name: 'CS.240',
+			title: 'CS.240 - Bişi bişi',
+			day: 1,
+			timeStart: '0830',
+			timeEnd: '1130',
+		},
+		{
+			name: 'EE.203',
+			title: 'EE.203 - ee falan',
+			day: 2,
+			timeStart: '1030',
+			timeEnd: '1230',
+		},
+		{
+			name: 'MATH.212',
+			title: 'MATH.212 - diff',
+			day: 4,
+			timeStart: '1230',
+			timeEnd: '1530',
+		},
+		{
+			name: 'ENG.102',
+			title: 'ENG.102 - eng',
+			day: 3,
+			timeStart: '1330',
+			timeEnd: '1530',
+		},
+	]*/);
 
 	return (
-		<Grommet theme={theme} full themeMode="dark">
-			<Main align="center">
-				<Box className={styles.schedule} fill="horizontal">
-					<Grid
-						fill
-						className={styles.grid}
-						rows={timeSlots}
-						columns={dayTracks}>
-						{Array(timeCount - 1)
-							.fill(null)
-							.map((_: any, index: number) => {
-								const time = moment(startTime).add(30 * index, 'm');
-								return (
-									<Box
-										key={index}
-										style={{
-											gridColumn: 'times',
-											gridRow: `time-${time.format('HHmm')}`,
-										}}>
-										{index % 2 === 0 ? time.format('HH:mm') : ''}
-									</Box>
-								);
-							})}
-						{Array(7)
-							.fill(null)
-							.map((_: any, index: number) => {
-								return (
-									<Box
-										key={index + 1}
-										style={{
-											gridColumn: `track-${index + 1}`,
-											gridRow: `tracks`,
-										}}>
-										{moment('Monday', 'dddd').add(index, 'd').format('dddd')}
-									</Box>
-								);
-							})}
-						{testData.map((data: any, index: number) => {
-							return (
-								<Event
-									key={index}
-									day={data.day}
-									timeStart={data.timeStart}
-									timeEnd={data.timeEnd}>
-									{data.timeStart}
-								</Event>
-							);
-						})}
-						{Array(7 * (timeCount - 1) - totalUsedArea + 1)
-							.fill(null)
-							.map((_: any, index: number) => {
-								return <div key={index} />;
-							})}
-					</Grid>
-				</Box>
-				<Box className={styles.controls} justify="center">
-					<Clock type="analog" />
-				</Box>
-			</Main>
+		<Grommet theme={themeGrommet} full themeMode={themeMode}>
+			<ThemeProvider theme={themeMui}>
+				<Main align="center">
+					<Box className={styles.schedule} fill="horizontal" background="brand">
+						<Schedule data={data} />
+					</Box>
+					<Box
+						className={[styles[themeMode], styles.controls].join(' ')}
+						fill="horizontal"
+						justify="center">
+						<Controls data={data} />
+					</Box>
+				</Main>
+			</ThemeProvider>
 		</Grommet>
 	);
 }
