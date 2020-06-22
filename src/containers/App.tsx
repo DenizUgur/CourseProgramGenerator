@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState, snackbar, download } from '../store';
+
 import styles from './App.module.scss';
 
-import { Schedule, Controls } from '../components';
+import { Schedule, Controls, WelcomeScreen } from '../components';
 
 import { Main, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { grommet } from 'grommet/themes';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider, Snackbar } from '@material-ui/core';
+import NoWiFi from '../components/NoWiFi/NoWiFi';
+import { Alert } from '@material-ui/lab';
 
 const themeGrommet = deepMerge(grommet, {
 	global: {
@@ -29,7 +34,24 @@ const themeGrommet = deepMerge(grommet, {
 });
 
 function App() {
-	const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
+	const dispatch = useDispatch();
+
+	const themeMode = useSelector((state: AppState) => state.system.mode);
+	const data = useSelector((state: AppState) => state.algorithm.result);
+
+	const snackbarData = useSelector((state: AppState) => state.system.snackbar);
+
+	const [online, setOnline] = useState(true);
+	const checkInternet = useCallback(() => {
+		let status = navigator.onLine;
+		setOnline(status);
+		if (status) dispatch(download());
+	}, [dispatch]);
+
+	useEffect(() => {
+		checkInternet();
+		return () => {};
+	}, [checkInternet]);
 
 	const themeMui = React.useMemo(
 		() =>
@@ -43,55 +65,43 @@ function App() {
 				typography: {
 					fontFamily: 'Quicksand',
 				},
+				overrides: {
+					MuiTooltip: {
+						tooltip: {
+							fontSize: '0.8rem',
+						},
+					},
+				},
 			}),
 		[themeMode]
 	);
 
-	const [data, setData] = useState(/*[
-		{
-			name: 'CS.240',
-			title: 'CS.240 - Bişi bişi',
-			day: 1,
-			timeStart: '0830',
-			timeEnd: '1130',
-		},
-		{
-			name: 'EE.203',
-			title: 'EE.203 - ee falan',
-			day: 2,
-			timeStart: '1030',
-			timeEnd: '1230',
-		},
-		{
-			name: 'MATH.212',
-			title: 'MATH.212 - diff',
-			day: 4,
-			timeStart: '1230',
-			timeEnd: '1530',
-		},
-		{
-			name: 'ENG.102',
-			title: 'ENG.102 - eng',
-			day: 3,
-			timeStart: '1330',
-			timeEnd: '1530',
-		},
-	]*/);
-
 	return (
 		<Grommet theme={themeGrommet} full themeMode={themeMode}>
 			<ThemeProvider theme={themeMui}>
-				<Main align="center">
-					<Box className={styles.schedule} fill="horizontal" background="brand">
-						<Schedule data={data} />
-					</Box>
-					<Box
-						className={[styles[themeMode], styles.controls].join(' ')}
-						fill="horizontal"
-						justify="center">
-						<Controls data={data} />
-					</Box>
-				</Main>
+				<Snackbar
+					open={snackbarData !== undefined}
+					onClose={() => dispatch(snackbar())}
+					key={snackbarData?.message}
+					autoHideDuration={snackbarData?.duration}
+					anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+					<Alert severity={snackbarData?.level}>{snackbarData?.message}</Alert>
+				</Snackbar>
+				{online ? (
+					<Main align="center">
+						<Box className={styles.schedule} fill="horizontal" background="brand">
+							{data.length > 0 ? <Schedule data={data} /> : <WelcomeScreen />}
+						</Box>
+						<Box
+							className={[styles[themeMode], styles.controls].join(' ')}
+							fill="horizontal"
+							justify="center">
+							<Controls />
+						</Box>
+					</Main>
+				) : (
+					<NoWiFi onRetry={() => checkInternet()} />
+				)}
 			</ThemeProvider>
 		</Grommet>
 	);

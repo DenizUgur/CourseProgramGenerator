@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState, theme, deploy } from '../../store';
+
 import styles from './Controls.module.scss';
+
 import { Box } from 'grommet';
 import { Autocomplete } from '@material-ui/lab';
-import { Portal, Chip, TextField, Button } from '@material-ui/core';
+import {
+	Portal,
+	Chip,
+	TextField,
+	Button,
+	Tooltip,
+	useTheme,
+} from '@material-ui/core';
 
-export default function Controls(props: any) {
-	const {data} = props;
-	
+export default function Controls() {
+	const themeData = useTheme();
+	const themeMode = useSelector((state: AppState) => state.system.mode);
+	const data_status = useSelector((state: AppState) => state.system.data_status);
+
+	const options = useSelector(
+		(state: AppState) => state.algorithm.autocomplete_courses
+	);
+	const result = useSelector((state: AppState) => state.algorithm.result);
+
+	const selectedCourses = useSelector(
+		(state: AppState) => state.algorithm.selected_courses
+	);
+	const dispatch = useDispatch();
+
 	const container = React.useRef(null);
-	const [selectedCourses, setSelectedCourses] = useState<any>([]);
 
 	return (
 		<Box flex justify="center" direction="row" align="center">
@@ -25,7 +47,9 @@ export default function Controls(props: any) {
 					fill="vertical"
 					justify="center"
 					align="center">
-					32
+					{result.reduce((acc, course) => {
+						return acc + course.credits;
+					}, 0)}
 				</Box>
 				CREDITS
 			</Box>
@@ -67,35 +91,57 @@ export default function Controls(props: any) {
 						direction="row"
 					/>
 				</Box>
-				<Autocomplete
-					style={{ flex: 1 }}
-					multiple
-					options={data}
-					getOptionLabel={d => d.title}
-					value={selectedCourses}
-					onChange={(_: any, newValue: any) => {
-						setSelectedCourses(newValue);
-					}}
-					renderTags={(value: any, getTagProps) => (
-						<Portal container={container.current}>
-							{value.map((option: any, index: number) => (
-								<Chip
-									variant="outlined"
-									label={option.name}
-									{...getTagProps({ index })}
+				<Tooltip
+					title={
+						data_status !== 'ready'
+							? 'We are downloading the catalog at the moment please wait.'
+							: ''
+					}
+					disableHoverListener={data_status === 'ready'}>
+					<span>
+						<Autocomplete
+							disabled={data_status !== 'ready'}
+							style={{ flex: 1 }}
+							multiple
+							options={options}
+							getOptionLabel={d => d.title}
+							value={selectedCourses}
+							onChange={(_: any, newValue: any[]) => {
+								dispatch(deploy(newValue));
+							}}
+							renderTags={(value: any, getTagProps) => (
+								<Portal container={container.current}>
+									{value.map((option: any, index: number) => (
+										<Chip
+											style={
+												result.map(r => r.name).includes(option.name)
+													? {
+															backgroundColor: themeData.palette.success[themeMode],
+															color: themeData.palette.success.contrastText,
+													  }
+													: {
+															backgroundColor: themeData.palette.error[themeMode],
+															color: themeData.palette.error.contrastText,
+													  }
+											}
+											variant="outlined"
+											label={option.name}
+											{...getTagProps({ index })}
+										/>
+									))}
+								</Portal>
+							)}
+							renderInput={params => (
+								<TextField
+									{...params}
+									variant="filled"
+									label="Courses"
+									placeholder="Start typing your courses..."
 								/>
-							))}
-						</Portal>
-					)}
-					renderInput={params => (
-						<TextField
-							{...params}
-							variant="filled"
-							label="Courses"
-							placeholder="Start typing your courses..."
+							)}
 						/>
-					)}
-				/>
+					</span>
+				</Tooltip>
 			</Box>
 			<Box
 				style={{
@@ -105,16 +151,27 @@ export default function Controls(props: any) {
 				fill="vertical"
 				direction="column"
 				justify="evenly">
-				<Button>Download latest catalog</Button>
-				<Box direction="row" justify="evenly">
-					<Button color="primary" variant="outlined">
-						Unavailable Hours
-					</Button>
-					{/* <Button
-						onClick={() => setThemeMode(themeMode === 'dark' ? 'light' : 'dark')}>
-						{themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
-					</Button> */}
-				</Box>
+				<Tooltip
+					placement="top-end"
+					title={
+						data_status !== 'ready'
+							? 'We are downloading the catalog at the moment please wait.'
+							: ''
+					}
+					disableHoverListener={data_status === 'ready'}>
+					<span style={{ justifyContent: 'center', display: 'flex' }}>
+						<Button
+							disabled={data_status !== 'ready'}
+							color="primary"
+							variant="outlined">
+							Unavailable Hours
+						</Button>
+					</span>
+				</Tooltip>
+
+				<Button onClick={() => dispatch(theme())}>
+					{themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+				</Button>
 			</Box>
 		</Box>
 	);

@@ -68,8 +68,8 @@ export default function Schedule(props: any) {
 						</Box>
 					);
 				})}
-			{data.map((data: any, index: number) => {
-				return <Event key={index} {...data} />;
+			{data.map((value: any, index: number) => {
+				return <Event key={index} {...value} />;
 			})}
 			{Array(5 * (timeCount - 1) - totalUsedArea + 1)
 				.fill(null)
