@@ -6,9 +6,10 @@ export interface Course {
 	name: string;
 	title: string;
 	credits: number;
-	day: number;
-	timeStart: string;
-	timeEnd: string;
+	class: string;
+	teacher: string;
+	corequisite: string;
+	hours: number[][];
 }
 
 export interface SimpleCourse {

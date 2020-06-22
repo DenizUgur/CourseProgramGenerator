@@ -165,4 +165,3 @@ build
 .features
 .jshintrc
 .prettierrc
-__mocks__
