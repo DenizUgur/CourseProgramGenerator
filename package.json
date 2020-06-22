@@ -22,12 +22,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=true react-scripts build",
     "test": "react-scripts test",
     "coverage": "CI=true npm test -- --coverage",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "preelectron-pack": "CI=true npm run build",
-    "electron-pack": "electron-builder --macos --c.extraMetadata.main=build/electron.js"
+    "preelectron-pack": "npm run build",
+    "electron-pack": "electron-builder --c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,9 +55,11 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
     "electron-is-dev": "^1.2.0",
     "fs": "0.0.1-security",
     "grommet": "^2.14.0",
+    "immer": "^7.0.4",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "path": "^0.12.7",
@@ -66,15 +68,16 @@
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "styled-components": "^5.1.1",
-    "xlsx": "^0.16.2"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.7.0",
-    "wait-on": "^5.0.1",
+    "electron-devtools-installer": "^3.0.0",
     "typescript": "~3.7.2",
+    "wait-on": "^5.0.1",
     "webpack": "^4.42.0"
   }
 }
