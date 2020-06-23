@@ -3,15 +3,18 @@ import styles from './Event.module.scss';
 import { Box } from 'grommet';
 
 export default function Event(props: any) {
-	const { day, timeStart, timeEnd } = props;
-	return (
-		<Box
-			className={styles.main}
-			style={{
-				gridColumn: `track-${day}`,
-				gridRow: `time-${timeStart} / time-${timeEnd}`,
-			}}>
-			{timeStart}
-		</Box>
-	);
+	const slots = Array(props.hours.length)
+		.fill(null)
+		.map((_: any, index: number) => {
+			return (
+				<Box
+					key={index}
+					className={styles.main}
+					style={{
+						gridColumn: `track-${props.hours[index].day}`,
+						gridRow: `time-${props.hours[index].timeStart} / time-${props.hours[index].timeEnd}`,
+					}}>{props.name}</Box>
+			);
+		});
+	return <>{slots}</>;
 }

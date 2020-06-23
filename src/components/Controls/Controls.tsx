@@ -14,15 +14,14 @@ import {
 	Tooltip,
 	useTheme,
 } from '@material-ui/core';
+import { Course } from '../../store/modules/algorithm/types';
 
 export default function Controls() {
 	const themeData = useTheme();
 	const themeMode = useSelector((state: AppState) => state.system.mode);
 	const data_status = useSelector((state: AppState) => state.system.data_status);
 
-	const options = useSelector(
-		(state: AppState) => state.algorithm.autocomplete_courses
-	);
+	const options = useSelector((state: AppState) => state.algorithm.all_courses);
 	const result = useSelector((state: AppState) => state.algorithm.result);
 
 	const selectedCourses = useSelector(
@@ -47,7 +46,7 @@ export default function Controls() {
 					fill="vertical"
 					justify="center"
 					align="center">
-					{result.reduce((acc, course) => {
+					{result.primary.reduce((acc, course) => {
 						return acc + course.credits;
 					}, 0)}
 				</Box>
@@ -87,7 +86,7 @@ export default function Controls() {
 					<Box
 						className={styles.chipArray}
 						ref={container}
-						justify="center"
+						justify="start"
 						direction="row"
 					/>
 				</Box>
@@ -104,31 +103,58 @@ export default function Controls() {
 							style={{ flex: 1 }}
 							multiple
 							options={options}
-							getOptionLabel={d => d.title}
+							getOptionLabel={d => d.name + ' - ' + d.title}
 							value={selectedCourses}
+							getOptionSelected={(compare: Course, to: Course) => {
+								if (compare.corequisite)
+									return (
+										compare.corequisite.includes(to.name) || compare.name === to.name
+									);
+								else return compare.name === to.name;
+							}}
 							onChange={(_: any, newValue: any[]) => {
 								dispatch(deploy(newValue));
 							}}
 							renderTags={(value: any, getTagProps) => (
 								<Portal container={container.current}>
-									{value.map((option: any, index: number) => (
-										<Chip
-											style={
-												result.map(r => r.name).includes(option.name)
-													? {
-															backgroundColor: themeData.palette.success[themeMode],
-															color: themeData.palette.success.contrastText,
-													  }
-													: {
-															backgroundColor: themeData.palette.error[themeMode],
-															color: themeData.palette.error.contrastText,
-													  }
-											}
-											variant="outlined"
-											label={option.name}
-											{...getTagProps({ index })}
-										/>
-									))}
+									{value.map((option: Course, index: number) => {
+										const style = result.primary.map(r => r.name).includes(option.name)
+											? {
+													backgroundColor: themeData.palette.success[themeMode],
+													color: themeData.palette.success.contrastText,
+											  }
+											: {
+													backgroundColor: themeData.palette.error[themeMode],
+													color: themeData.palette.error.contrastText,
+											  };
+
+										const core = [
+											<Chip
+												key={option.name}
+												style={style}
+												variant="outlined"
+												label={option.name}
+												{...getTagProps({ index })}
+											/>,
+										];
+
+										const corequisites = option.corequisite
+											? option.corequisite.map((val: string, index: number) => {
+													return (
+														<Chip
+															key={val}
+															style={style}
+															variant="outlined"
+															label={val}
+															{...getTagProps({ index })}
+															onDelete={undefined}
+														/>
+													);
+											  })
+											: '';
+
+										return [core, corequisites];
+									})}
 								</Portal>
 							)}
 							renderInput={params => (

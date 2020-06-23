@@ -2,38 +2,28 @@
 const moment = require("moment");
 var errors = [];
 
-export function getResult(world, input, unavailable_hours = "") {
+export function getResult(world, input, unavailable_hours) {
   return new Promise((resolve, reject) => {
     var found = [];
     var result = [];
     errors = [];
 
-    unavailable_hours = unavailable_hours.split(" ");
-    input = input.split(" ");
-
-    unavailable_hours.forEach(function(el, i) {
-      if (i % 2 === 1) {
-        result.push({
-          name: null,
-          class: null,
-          hours: [
-            [
-              moment(unavailable_hours[i - 1], "d,HH:mm").valueOf(),
-              moment(el, "d,HH:mm").valueOf()
+    if (unavailable_hours) {
+      unavailable_hours.forEach(function(el, i) {
+        if (i % 2 === 1) {
+          result.push({
+            name: null,
+            class: null,
+            hours: [
+              [
+                moment(unavailable_hours[i - 1], "d,HH:mm").valueOf(),
+                moment(el, "d,HH:mm").valueOf()
+              ]
             ]
-          ]
-        });
-      }
-    });
-
-    //Show if anything is not found in the world
-    input.forEach(function(el) {
-      var f = false;
-      world.forEach(function(eli) {
-        if (el === eli.name) f = true;
+          });
+        }
       });
-      if (!f) log(el + " not found.");
-    });
+    }
 
     //Sort so that it is guarenteed that A section will be recommended first
     world.sort((x, y) => (x.class < y.class ? -1 : 1));
@@ -118,23 +108,7 @@ export function getResult(world, input, unavailable_hours = "") {
               if (!eligible && iii === qualifiers.length - 1) {
                 try {
                   qu.collidesWith.forEach(col => {
-                    log(
-                      quc.name +
-                        "." +
-                        quc.class +
-                        " collides with " +
-                        col.name +
-                        "." +
-                        col.selected.class
-                    );
-
                     if (col.candidates.length > 1) {
-                      log(
-                        "Trying to change " +
-                          col.name +
-                          " with a different class"
-                      );
-
                       col.candidates.forEach(colcan => {
                         if (col.selected.class !== colcan.class) {
                           var inner_eligible = true;
@@ -189,13 +163,6 @@ export function getResult(world, input, unavailable_hours = "") {
                             });
 
                             if (inner_eligible) {
-                              log(
-                                "Wuhuu, we can change it with " +
-                                  colcan.name +
-                                  "." +
-                                  colcan.class
-                              );
-                              log();
                               eligible = true;
                               throw BreakException;
                             } else {
@@ -207,10 +174,17 @@ export function getResult(world, input, unavailable_hours = "") {
                         }
                       });
                     } else {
-                      log("There is nothing we can do!");
+                      log({
+                        course: quc.name,
+                        collidesWith: col.name,
+                        message: "No alternative for colliding class is compatible"
+                      })
                       throw BreakException;
                     }
-                    log("Failed!\n");
+                    log({
+                      course: quc.name,
+                      message: "No alternative class for colliding class"
+                    })
                   });
                 } catch (ex) {}
               }
@@ -247,7 +221,6 @@ export function getResult(world, input, unavailable_hours = "") {
     //Add alternative classes
     var alternatives = [];
     var table = [];
-    var excess = [];
     qualifiers.forEach(q => {
       q.candidates.forEach(qc => {
         var eligible = true;
@@ -282,14 +255,15 @@ export function getResult(world, input, unavailable_hours = "") {
           });
         } catch (ex) {}
         if (eligible) {
-          alternatives.push([
-            qc.name,
-            qc.class,
-            qc.teacher,
-            moment(qc.hours[0][0]).day(),
-            moment(qc.hours[0][0]).format("HH:mm"),
-            moment(qc.hours[0][1]).format("HH:mm")
-          ]);
+          alternatives.push({
+            name: qc.name,
+            title: qc.title,
+            credits: qc.credits,
+            class: qc.class,
+            teacher: qc.teacher,
+            corequisite: qc.corequisite,
+            hours: qc.hours,
+          });
         }
       });
     });
@@ -299,42 +273,37 @@ export function getResult(world, input, unavailable_hours = "") {
     });
 
     //Print results
-    var total_credits = 0;
     result.forEach(function(el) {
       if (el.name) {
-        table.push([
-          el.name,
-          el.class,
-          el.teacher,
-          moment(el.hours[0][0]).day(),
-          moment(el.hours[0][0]).format("HH:mm"),
-          moment(el.hours[0][1]).format("HH:mm")
-        ]);
-        total_credits += el.credits;
-      }
-      if (el.hours.length > 1) {
-        if (el.name) {
-          excess.push([
-            el.name,
-            el.class,
-            el.teacher,
-            moment(el.hours[1][0]).day(),
-            moment(el.hours[1][0]).format("HH:mm"),
-            moment(el.hours[1][1]).format("HH:mm")
-          ]);
-        }
+        table.push({
+          name: el.name,
+          title: el.title,
+          credits: el.credits,
+          class: el.class,
+          teacher: el.teacher,
+          corequisite: el.corequisite,
+          hours: el.hours,
+        });
       }
     });
 
     //Check if anything has failed
-    input.forEach(function(eli) {
+    /*input.forEach(function(eli) {
       var f = false;
       result.forEach(function(el) {
         if (eli === el.name) f = true;
       });
-      if (!f) log(eli + " is impossible to fit to your importance order.");
+      if (!f) log({
+        course: eli,
+        message: "Impossible to fit to your importance order."
+      });
+    });*/
+    
+    resolve({
+      primary: table,
+      alternatives,
+      errors
     });
-    resolve([table, excess, alternatives, total_credits, errors]);
   });
 }
 

@@ -3,21 +3,42 @@ import styles from './Schedule.module.scss';
 import { Grid, Box } from 'grommet';
 import moment from 'moment';
 import { Event } from '../index';
+import { Course } from '../../store/modules/algorithm/types';
 
 export default function Schedule(props: any) {
-	const { data } = props;
+	const fixHour = (hour: string) => {
+		if (hour.charAt(2) === '4') {
+			return hour.substring(0, 2) + '3' + hour.substring(3);
+		}
+		return hour;
+	};
+
+	const data = props.data.map((val: Course, _: number) => {
+		return {
+			...val,
+			hours: val.hours.map((hour: number[], _: number) => {
+				return {
+					day: moment(hour[0]).day(),
+					timeStart: fixHour(moment(hour[0]).format('HHmm')),
+					timeEnd: fixHour(moment(hour[1]).format('HHmm')),
+				};
+			}),
+		};
+	});
 
 	let dayTracks = Array(7).fill(null);
 
 	const calcArea = (x: string, y: string) =>
 		Math.abs(moment(x, 'HHmm').diff(moment(y, 'HHmm'), 'm')) / 30;
 
-	const totalUsedArea = data.reduce(
-		(accumulator: number, { timeStart, timeEnd }: any) => {
-			return accumulator + calcArea(timeStart, timeEnd);
-		},
-		0
-	);
+	const totalUsedArea = data.reduce((accumulator: number, { hours }: any) => {
+		return (
+			accumulator +
+			hours.reduce((acc: number, { timeStart, timeEnd }: any) => {
+				return acc + calcArea(timeStart, timeEnd);
+			}, 0)
+		);
+	}, 0);
 
 	const timeCount = 23;
 	let timeSlots = Array(timeCount).fill(null);

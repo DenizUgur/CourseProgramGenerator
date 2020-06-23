@@ -90,7 +90,11 @@ function App() {
 				{online ? (
 					<Main align="center">
 						<Box className={styles.schedule} fill="horizontal" background="brand">
-							{data.length > 0 ? <Schedule data={data} /> : <WelcomeScreen />}
+							{data.primary.length > 0 ? (
+								<Schedule data={data.primary} />
+							) : (
+								<WelcomeScreen />
+							)}
 						</Box>
 						<Box
 							className={[styles[themeMode], styles.controls].join(' ')}

@@ -1,25 +1,23 @@
-import { AlgorithmState, UPDATE_COURSES, SELECTED_COURSES } from './types';
+import {
+	UPDATE_COURSES,
+	SELECTED_COURSES,
+	RESULT_COURSES,
+	UNAVAILABLE_HOURS,
+	ERRORS_COURSES,
+	AlgorithmState,
+} from './types';
 import { produce } from 'immer';
 
 const INITIAL_STATE: AlgorithmState = {
-	result: [
-		{
-			name: 'CS.240',
-			title: 'string',
-			credits: 1,
-			day: 1,
-			timeStart: '0830',
-			timeEnd: '1130',
-		},
-	],
+	result: {
+		primary: [],
+		alternatives: [],
+		errors: [],
+	},
 	all_courses: [],
 	selected_courses: [],
-	autocomplete_courses: [
-		{
-			name: 'CS.240',
-			title: 'annen',
-		},
-	],
+	unavailable_hours: [],
+	errors: [],
 };
 
 export default function algorithm(state = INITIAL_STATE, action: any) {
@@ -31,6 +29,18 @@ export default function algorithm(state = INITIAL_STATE, action: any) {
 
 			case SELECTED_COURSES:
 				draft.selected_courses = action.payload;
+				break;
+
+			case RESULT_COURSES:
+				draft.result = action.payload;
+				break;
+
+			case UNAVAILABLE_HOURS:
+				draft.unavailable_hours = action.payload;
+				break;
+
+			case ERRORS_COURSES:
+				draft.errors = action.payload;
 				break;
 
 			default:
