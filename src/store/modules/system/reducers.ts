@@ -21,6 +21,7 @@ export default function system(
 			case SNACKBAR_MESSAGE:
 				draft.snackbar = action.show
 					? {
+							show: true,
 							level: action.level,
 							message: action.message,
 							duration: action.duration,

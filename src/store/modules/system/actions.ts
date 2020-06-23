@@ -19,7 +19,11 @@ export function data(status: StatusType) {
 	};
 }
 
-export function snackbar(level?: LevelType, message?: string, duration = null) {
+export function snackbar(
+	level?: LevelType,
+	message?: string,
+	duration: number | null = null
+) {
 	return {
 		type: SNACKBAR_MESSAGE,
 		show: level && message,
