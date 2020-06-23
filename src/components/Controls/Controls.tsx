@@ -128,32 +128,43 @@ export default function Controls() {
 													color: themeData.palette.error.contrastText,
 											  };
 
-										const core = [
-											<Chip
+										const error_message = (name: string) => {
+											let node = result.errors.find(e => name === e.course);
+											if (node) return node.message.short;
+											return '';
+										};
+
+										const core = (
+											<Tooltip
 												key={option.name}
-												style={style}
-												variant="outlined"
-												label={option.name}
-												{...getTagProps({ index })}
-											/>,
-										];
+												placement="top"
+												title={error_message(option.name)}>
+												<Chip
+													style={style}
+													variant="outlined"
+													label={option.name}
+													{...getTagProps({ index })}
+												/>
+											</Tooltip>
+										);
 
 										const corequisites = option.corequisite
 											? option.corequisite.map((val: string, index: number) => {
 													return (
-														<Chip
-															key={val}
-															style={style}
-															variant="outlined"
-															label={val}
-															{...getTagProps({ index })}
-															onDelete={undefined}
-														/>
+														<Tooltip key={val} placement="top" title={error_message(val)}>
+															<Chip
+																style={style}
+																variant="outlined"
+																label={val}
+																{...getTagProps({ index })}
+																onDelete={undefined}
+															/>
+														</Tooltip>
 													);
 											  })
-											: '';
+											: [];
 
-										return [core, corequisites];
+										return [core, ...corequisites];
 									})}
 								</Portal>
 							)}

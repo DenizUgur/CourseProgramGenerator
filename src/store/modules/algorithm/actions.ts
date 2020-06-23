@@ -3,7 +3,6 @@ import {
 	SELECTED_COURSES,
 	RESULT_COURSES,
 	UNAVAILABLE_HOURS,
-	ERRORS_COURSES,
 	Course,
 } from './types';
 import { AppState } from '../..';
@@ -24,7 +23,7 @@ export function selected(courses: Course[]) {
 	};
 }
 
-export function result(courses: Course[]) {
+export function result(courses: any) {
 	return {
 		type: RESULT_COURSES,
 		payload: courses,
@@ -35,13 +34,6 @@ export function unavailable(hours: string[]) {
 	return {
 		type: UNAVAILABLE_HOURS,
 		payload: hours,
-	};
-}
-
-export function errors(payload: any[]) {
-	return {
-		type: ERRORS_COURSES,
-		payload,
 	};
 }
 
@@ -60,8 +52,26 @@ export function deploy(courses?: Course[], hours?: string[]) {
 				courses.map(c => c.name),
 				hours
 			);
+
+			if (res.errors) {
+				if (res.errors.length === 1)
+					dispatch(snackbar('info', res.errors[0].message.long, 5000));
+				else if (res.errors.length > 1)
+					dispatch(
+						snackbar(
+							'info',
+							`There are several issues with selected courses. 
+							If you hover over the course name chips you can see their issues.`,
+							5000
+						)
+					);
+			}
+
 			dispatch(result(res));
 		} catch (error) {
+			dispatch(
+				snackbar('error', 'An error occured. Please file an issue on GitHub.')
+			);
 			console.error(error);
 		}
 	};

@@ -71,6 +71,11 @@ function App() {
 							fontSize: '0.8rem',
 						},
 					},
+					MuiSnackbar: {
+						root: {
+							maxWidth: "30vw"
+						}
+					}
 				},
 			}),
 		[themeMode]

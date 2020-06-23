@@ -3,7 +3,6 @@ import {
 	SELECTED_COURSES,
 	RESULT_COURSES,
 	UNAVAILABLE_HOURS,
-	ERRORS_COURSES,
 	AlgorithmState,
 } from './types';
 import { produce } from 'immer';
@@ -37,10 +36,6 @@ export default function algorithm(state = INITIAL_STATE, action: any) {
 
 			case UNAVAILABLE_HOURS:
 				draft.unavailable_hours = action.payload;
-				break;
-
-			case ERRORS_COURSES:
-				draft.errors = action.payload;
 				break;
 
 			default:

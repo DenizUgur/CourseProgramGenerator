@@ -83,6 +83,17 @@ export function getResult(world, input, unavailable_hours) {
             });
           });
 
+          if (!eligible) {
+            log({
+              course: quc.name,
+              message: {
+                long: `${quc.name} collides with the unavailable hours you defined. We have tried every 
+                possible combination between them but there wasn't any solution.`,
+                short: `${quc.name} collides with unavailable hours.`
+              }
+            })
+          }
+
           if (eligible) {
             //Try to fit on the first try
             //If it fails gather which courses it collides with
@@ -177,13 +188,21 @@ export function getResult(world, input, unavailable_hours) {
                       log({
                         course: quc.name,
                         collidesWith: col.name,
-                        message: "No alternative for colliding class is compatible"
+                        message: {
+                          long: `${quc.name} collides with ${col.name}. We have tried every 
+                          possible combination between them but there wasn't any solution.`,
+                          short: `${quc.name} collides with ${col.name}.`
+                        }
                       })
                       throw BreakException;
                     }
                     log({
                       course: quc.name,
-                      message: "No alternative class for colliding class"
+                      message: {
+                        long: `There weren't any alternative section for ${quc.name}. 
+                        So, we couldn't fit ${quc.name} to your program.`,
+                        short: `${quc.name} is single section and it didn't fit to your program.`
+                      }
                     })
                   });
                 } catch (ex) {}
@@ -298,6 +317,13 @@ export function getResult(world, input, unavailable_hours) {
         message: "Impossible to fit to your importance order."
       });
     });*/
+
+    //Clean logs if there are any course that was fitted after logged
+    errors.filter((val) => {
+      return !table.find((to) => {
+        return val.name === to.name;
+      })
+    })
     
     resolve({
       primary: table,
