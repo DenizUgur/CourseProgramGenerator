@@ -1,6 +1,5 @@
 .main {
-	background-color: rgba(204, 0, 0, 0.308);
-	border: 2px solid rgb(204, 0, 0) !important;
+	border: 2px solid black !important;
 	border-radius: 5px;
 	margin: 1px;
 	cursor: pointer;
@@ -8,7 +7,16 @@
 	transition: all 250ms ease-in-out;
 
 	&:hover {
-		background-color: rgba(255, 0, 0, 0.35);
+		filter: brightness(90%);
 		transform: scale(1.05);
+	}
+
+	* {
+		border: unset !important;
+		overflow : hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
 	}
 }

@@ -13,29 +13,32 @@ export default function Schedule(props: any) {
 		return hour;
 	};
 
+	const calcArea = (x: string, y: string) =>
+		Math.abs(moment(x, 'HHmm').diff(moment(y, 'HHmm'), 'm')) / 30;
+
 	const data = props.data.map((val: Course, _: number) => {
 		return {
 			...val,
 			hours: val.hours.map((hour: number[], _: number) => {
+				const timeStart = fixHour(moment(hour[0]).format('HHmm'));
+				const timeEnd = fixHour(moment(hour[1]).format('HHmm'));
+				const area = calcArea(timeStart, timeEnd);
+
 				return {
 					day: moment(hour[0]).day(),
-					timeStart: fixHour(moment(hour[0]).format('HHmm')),
-					timeEnd: fixHour(moment(hour[1]).format('HHmm')),
+					timeStart,
+					timeEnd,
+					area,
 				};
 			}),
 		};
 	});
 
-	let dayTracks = Array(7).fill(null);
-
-	const calcArea = (x: string, y: string) =>
-		Math.abs(moment(x, 'HHmm').diff(moment(y, 'HHmm'), 'm')) / 30;
-
 	const totalUsedArea = data.reduce((accumulator: number, { hours }: any) => {
 		return (
 			accumulator +
-			hours.reduce((acc: number, { timeStart, timeEnd }: any) => {
-				return acc + calcArea(timeStart, timeEnd);
+			hours.reduce((acc: number, { area }: any) => {
+				return acc + area;
 			}, 0)
 		);
 	}, 0);
@@ -43,6 +46,7 @@ export default function Schedule(props: any) {
 	const timeCount = 23;
 	let timeSlots = Array(timeCount).fill(null);
 	let startTime = moment('0830', 'HHmm');
+	let dayTracks = Array(7).fill(null);
 
 	dayTracks = dayTracks.map((_: any, index: number) => {
 		if (index === 0) return `[times] 4em`;
