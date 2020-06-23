@@ -1,18 +1,25 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState, snackbar, download } from '../store';
+import { AppState, snackbar, system_init, theme } from '../store';
 
 import styles from './App.module.scss';
 
-import { Schedule, Controls, WelcomeScreen } from '../components';
+import { Schedule, Controls, WelcomeScreen, NoWiFi } from '../components';
 
 import { Main, Box, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
 import { grommet } from 'grommet/themes';
 
-import { createMuiTheme, ThemeProvider, Snackbar } from '@material-ui/core';
-import NoWiFi from '../components/NoWiFi/NoWiFi';
+import {
+	createMuiTheme,
+	ThemeProvider,
+	Snackbar,
+	Button,
+	useMediaQuery,
+} from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+
+const { shell } = window.require('electron');
 
 const themeGrommet = deepMerge(grommet, {
 	global: {
@@ -36,22 +43,27 @@ const themeGrommet = deepMerge(grommet, {
 function App() {
 	const dispatch = useDispatch();
 
+	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
 	const themeMode = useSelector((state: AppState) => state.system.mode);
 	const data = useSelector((state: AppState) => state.algorithm.result);
 
 	const snackbarData = useSelector((state: AppState) => state.system.snackbar);
+	const online = useSelector((state: AppState) => state.system.online);
 
-	const [online, setOnline] = useState(true);
-	const checkInternet = useCallback(() => {
-		let status = navigator.onLine;
-		setOnline(status);
-		if (status) dispatch(download());
+	const systemInit = useCallback(() => {
+		dispatch(system_init());
 	}, [dispatch]);
 
 	useEffect(() => {
-		checkInternet();
+		systemInit();
 		return () => {};
-	}, [checkInternet]);
+	}, [systemInit]);
+
+	useEffect(() => {
+		dispatch(theme(prefersDarkMode ? 'dark' : 'light'));
+		return () => {};
+	}, [dispatch, prefersDarkMode]);
 
 	const themeMui = React.useMemo(
 		() =>
@@ -73,9 +85,9 @@ function App() {
 					},
 					MuiSnackbar: {
 						root: {
-							maxWidth: "30vw"
-						}
-					}
+							maxWidth: '40vw',
+						},
+					},
 				},
 			}),
 		[themeMode]
@@ -90,7 +102,22 @@ function App() {
 					key={snackbarData?.message}
 					autoHideDuration={snackbarData?.duration}
 					anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
-					<Alert severity={snackbarData?.level}>{snackbarData?.message}</Alert>
+					<Alert
+						action={
+							snackbarData?.update ? (
+								<Button
+									onClick={() =>
+										shell.openExternal(
+											'https://github.com/DenizUgur/CourseProgramGenerator#download-latest-version'
+										)
+									}>
+									Download Here
+								</Button>
+							) : undefined
+						}
+						severity={snackbarData?.level}>
+						{snackbarData?.message}
+					</Alert>
 				</Snackbar>
 				{online ? (
 					<Main align="center">
@@ -109,7 +136,7 @@ function App() {
 						</Box>
 					</Main>
 				) : (
-					<NoWiFi onRetry={() => checkInternet()} />
+					<NoWiFi onRetry={() => systemInit()} />
 				)}
 			</ThemeProvider>
 		</Grommet>

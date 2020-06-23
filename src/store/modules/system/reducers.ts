@@ -2,12 +2,14 @@ import {
 	SNACKBAR_MESSAGE,
 	THEME_TOGGLE,
 	DATA_STATUS,
+	ONLINE_STATUS,
 	SystemState,
 } from './types';
 import produce from 'immer';
 
 const INITIAL_STATE: SystemState = {
 	mode: 'dark',
+	online: false,
 	data_status: 'not ready',
 	snackbar: undefined,
 };
@@ -25,16 +27,25 @@ export default function system(
 							level: action.level,
 							message: action.message,
 							duration: action.duration,
+							update: action.update,
 					  }
 					: undefined;
 				break;
 
 			case THEME_TOGGLE:
-				draft.mode = draft.mode === 'dark' ? 'light' : 'dark';
+				draft.mode = action.mode
+					? action.mode
+					: draft.mode === 'dark'
+					? 'light'
+					: 'dark';
 				break;
 
 			case DATA_STATUS:
 				draft.data_status = action.status;
+				break;
+
+			case ONLINE_STATUS:
+				draft.online = action.status;
 				break;
 
 			default:
