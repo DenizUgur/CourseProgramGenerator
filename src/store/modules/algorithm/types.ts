@@ -3,6 +3,11 @@ export const SELECTED_COURSES = 'ALGORITHM_SELECTED_COURSES';
 export const RESULT_COURSES = 'ALGORITHM_RESULT_COURSES';
 export const UNAVAILABLE_HOURS = 'ALGORITHM_UNAVAILABLE_HOURS';
 
+export type HourType = {
+	start: number;
+	end: number;
+};
+
 export interface Course {
 	name: string;
 	title: string;
@@ -21,6 +26,6 @@ export interface AlgorithmState {
 	};
 	selected_courses: Course[];
 	all_courses: Course[];
-	unavailable_hours: string[];
+	unavailable_hours: HourType[];
 	errors: any[];
 }

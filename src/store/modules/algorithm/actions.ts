@@ -4,9 +4,10 @@ import {
 	RESULT_COURSES,
 	UNAVAILABLE_HOURS,
 	Course,
+	HourType,
 } from './types';
 import { AppState } from '../..';
-import { getResult } from '../../../utils/process';
+import { getResult } from '../../../algorithm/process';
 import { snackbar, data } from '../system/actions';
 
 export function update(courses: Course[]) {
@@ -30,14 +31,14 @@ export function result(courses: any) {
 	};
 }
 
-export function unavailable(hours: string[]) {
+export function unavailable(hours: HourType[]) {
 	return {
 		type: UNAVAILABLE_HOURS,
 		payload: hours,
 	};
 }
 
-export function deploy(courses?: Course[], hours?: string[]) {
+export function deploy(courses?: Course[], hours?: HourType[]) {
 	return async (dispatch: any, getState: any) => {
 		const state: AppState = getState();
 		courses = courses || state.algorithm.selected_courses;
@@ -78,11 +79,13 @@ export function deploy(courses?: Course[], hours?: string[]) {
 }
 
 export function download() {
-	return (dispatch: any) => {
+	return async (dispatch: any) => {
 		dispatch(snackbar('info', 'Downloading the latest available catalog...'));
 		dispatch(data('not ready'));
 
-		fetch('https://www.denizdaking.com/CourseProgramGenerator/catalog.json')
+		return fetch(
+			'https://www.denizdaking.com/CourseProgramGenerator/catalog.json'
+		)
 			.then(res => res.json())
 			.then(catalog => {
 				dispatch(update(catalog));

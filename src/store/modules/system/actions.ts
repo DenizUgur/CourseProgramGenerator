@@ -53,26 +53,20 @@ export function system_init() {
 		dispatch(online(status));
 		if (status) {
 			await dispatch(download());
-			fetch(
+			return fetch(
 				'https://api.github.com/repos/DenizUgur/CourseProgramGenerator/releases/latest'
 			)
 				.then(res => res.json())
 				.then(json => {
 					const version = json.tag_name.substring(1);
 					if (version !== remote.app.getVersion()) {
-						const ready = getState().system.data_status === 'ready';
-						setTimeout(
-							() => {
-								dispatch(
-									snackbar(
-										'info',
-										'A new version is available for you to download!',
-										6000,
-										true
-									)
-								);
-							},
-							ready ? 3000 : 7000
+						dispatch(
+							snackbar(
+								'info',
+								'A new version is available for you to download!',
+								6000,
+								true
+							)
 						);
 					}
 				})
