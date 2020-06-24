@@ -88,6 +88,7 @@ export default function Controls() {
 						ref={container}
 						justify="start"
 						direction="row"
+						data-testid="chip-array"
 					/>
 				</Box>
 				<Tooltip
@@ -102,7 +103,9 @@ export default function Controls() {
 							disabled={data_status !== 'ready'}
 							style={{ flex: 1 }}
 							multiple
-							options={options}
+							options={options.filter(
+								(v, i, a) => a.findIndex(t => t.name === v.name) === i
+							)}
 							getOptionLabel={d => d.name + ' - ' + d.title}
 							value={selectedCourses}
 							getOptionSelected={(compare: Course, to: Course) => {
@@ -198,6 +201,7 @@ export default function Controls() {
 					disableHoverListener={data_status === 'ready'}>
 					<span style={{ justifyContent: 'center', display: 'flex' }}>
 						<Button
+							style={{ width: '100%' }}
 							disabled={data_status !== 'ready'}
 							color="primary"
 							variant="outlined">

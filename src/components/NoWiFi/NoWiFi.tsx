@@ -20,7 +20,7 @@ export default function NoWiFi(props: any) {
 	return (
 		<Box direction="column" justify="center" align="center" fill>
 			<WiFi className={styles[themeMode]} />
-			<Heading level="2">No internet connection detected...</Heading>
+			<Heading level="2" data-testid="no-internet">No internet connection detected...</Heading>
 			<p style={{ width: '50vw', textAlign: 'center' }}>
 				We need internet connection to download latest available course catalog.
 				Please connect to internet and retry.
@@ -37,6 +37,7 @@ export default function NoWiFi(props: any) {
 				</Button>
 				<Button
 					variant="contained"
+					data-testid="quit-button"
 					onClick={() =>
 						process.platform !== 'darwin'
 							? remote.app.exit(0)

@@ -10,12 +10,13 @@ export default function WelcomeScreen() {
 	return (
 		<Box fill flex justify="center" align="center">
 			<Image src={Logo} width="200px" />
-			<Heading level="2">Course Program Generator</Heading>
+			<Heading level="2" data-testid="title">Course Program Generator</Heading>
 			<Box gap="small" justify="center" direction="row" align="center">
 				<i>Made by</i>
 				<Button
 					variant="outlined"
 					onClick={() => shell.openExternal('https://denizugur.dev')}
+					data-testid="dev-link"
 					startIcon={
 						<Avatar
 							alt="Deniz Uğur"
