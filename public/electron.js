@@ -5,12 +5,6 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const isDev = require('electron-is-dev');
 
-const {
-	default: installExtension,
-	REACT_DEVELOPER_TOOLS,
-	REDUX_DEVTOOLS,
-} = require('electron-devtools-installer');
-
 let mainWindow;
 
 function createWindow() {
@@ -45,6 +39,12 @@ app.on('activate', () => {
 });
 
 if (isDev) {
+	const {
+		default: installExtension,
+		REACT_DEVELOPER_TOOLS,
+		REDUX_DEVTOOLS,
+	} = require('electron-devtools-installer');
+	
 	app.whenReady().then(() => {
 		installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
 			.then(name => console.log(`Added Extension:  ${name}`))
