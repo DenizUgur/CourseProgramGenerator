@@ -12,7 +12,8 @@
     "appId": "com.deniz.courseprogramgen",
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "package.json"
     ],
     "directories": {
       "buildResources": "resources"
@@ -36,6 +37,7 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [
@@ -51,14 +53,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/randomcolor": "^0.5.5",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.9",
     "electron-is-dev": "^1.2.0",
-    "fs": "0.0.1-security",
     "grommet": "^2.14.0",
     "immer": "^7.0.4",
     "moment": "^2.27.0",
@@ -74,10 +69,23 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/randomcolor": "^0.5.5",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.7.0",
     "electron-devtools-installer": "^3.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "24.9.0",
+    "jest-enzyme": "^7.1.2",
+    "redux-mock-store": "^1.5.4",
     "typescript": "~3.7.2",
     "wait-on": "^5.0.1",
     "webpack": "^4.42.0"
