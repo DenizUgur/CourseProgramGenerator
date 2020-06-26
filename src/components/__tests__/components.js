@@ -150,8 +150,8 @@ describe('<Schedule /> Component', () => {
 		const expectedActions = {
 			type: 'ALGORITHM_UNAVAILABLE_HOURS',
 			payload: [
-				{ start: 1592803800000, end: 1592807400000 },
-				{ start: 1592890200000, end: 1592893800000 },
+				{ end: 1592818200000, start: 1592814600000 },
+				{ end: 1592904600000, start: 1592901000000 },
 			],
 		};
 
@@ -177,8 +177,8 @@ describe('<Schedule /> Component', () => {
 		const expectedActions = {
 			type: 'ALGORITHM_UNAVAILABLE_HOURS',
 			payload: [
-				{ start: 1592803800000, end: 1592807400000 },
-				{ start: 1592890200000, end: 1592902800000 },
+				{ end: 1592818200000, start: 1592814600000 },
+				{ end: 1592904600000, start: 1592892000000 },
 			],
 		};
 

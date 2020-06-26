@@ -7,9 +7,10 @@ import { Course, HourType } from '../../store/modules/algorithm/types';
 import styles from './Schedule.module.scss';
 
 import { Grid, Box } from 'grommet';
-import moment from 'moment';
-
 import { Event, EmptyEvent } from '../index';
+
+import originalMoment from 'moment';
+const moment = (...args: any) => originalMoment.utc(...args);
 
 export default function Schedule(props: any) {
 	const fixHour = (hour: string) => {
@@ -124,7 +125,7 @@ export default function Schedule(props: any) {
 
 	const onMouseDown = (event: any) => {
 		const className = event.target.className;
-		if (event.target && className.indexOf("MuiButton") === -1) {
+		if (event.target && className.indexOf('MuiButton') === -1) {
 			setStartPos(pos);
 			setDraw(true);
 

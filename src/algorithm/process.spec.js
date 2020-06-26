@@ -5,8 +5,8 @@ const world = require('../../__mocks__/catalog.json');
 
 const c = (s, e) => {
 	return {
-		start: moment(s, 'd,HH:mm').valueOf(),
-		end: moment(e, 'd,HH:mm').valueOf(),
+		start: moment.utc(s, 'd,HH:mm').valueOf(),
+		end: moment.utc(e, 'd,HH:mm').valueOf(),
 	};
 };
 

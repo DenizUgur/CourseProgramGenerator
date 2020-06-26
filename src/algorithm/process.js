@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-const moment = require('moment');
+const originalMoment = require('moment');
+const moment = (...args) => originalMoment.utc(...args);
 var errors = [];
 
 export function getResult(world, input, unavailable_hours) {
