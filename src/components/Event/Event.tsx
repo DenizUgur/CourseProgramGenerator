@@ -1,38 +1,67 @@
-import React from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store';
 
 import styles from './Event.module.scss';
 
 import { Box } from 'grommet';
-import { useTheme } from '@material-ui/core';
+import { useTheme, Button } from '@material-ui/core';
 
 import randomColor from 'randomcolor';
 
-export default function Event(props: any) {
+export function EmptyEvent(props: any) {
 	const theme = useTheme();
+	return (
+		<Box
+			className={[styles.main, props.onDelete ? styles.uh : undefined].join(' ')}
+			style={
+				props.color
+					? {
+							gridColumn: `track-${props.day}`,
+							gridRow: `time-${props.timeStart} / time-${props.timeEnd}`,
+							backgroundColor: props.color,
+							color: theme.palette.getContrastText(props.color),
+					  }
+					: {
+							gridColumn: `track-${props.day}`,
+							gridRow: `time-${props.timeStart} / time-${props.timeEnd}`,
+					  }
+			}
+			direction="column"
+			align={props.onDelete ? 'center' : 'start'}
+			justify={props.area ? 'end' : 'center'}
+			pad={{ left: '3%' }}
+			fill>
+			{props.children ? (
+				props.children
+			) : (
+				<Button variant="outlined" onClick={props.onDelete}>
+					Remove
+				</Button>
+			)}
+		</Box>
+	);
+}
+
+export default function Event(props: any) {
 	const themeMode = useSelector((state: AppState) => state.system.mode);
-	const color = randomColor({ luminosity: themeMode });
+	let color = useRef(randomColor({ luminosity: themeMode }));
+
+	useMemo(() => {
+		color.current = randomColor({ luminosity: themeMode });
+	}, [themeMode]);
 
 	const slots = Array(props.hours.length)
 		.fill(null)
 		.map((_: any, index: number) => {
 			const area = props.hours[index].area > 2;
 			return (
-				<Box
+				<EmptyEvent
 					key={index}
-					className={styles.main}
-					style={{
-						gridColumn: `track-${props.hours[index].day}`,
-						gridRow: `time-${props.hours[index].timeStart} / time-${props.hours[index].timeEnd}`,
-						backgroundColor: color,
-						color: theme.palette.getContrastText(color),
-					}}
-					direction="column"
-					align="start"
-					justify={area ? 'end' : 'center'}
-					pad={{ left: '3%' }}
-					fill>
+					day={props.hours[index].day}
+					timeStart={props.hours[index].timeStart}
+					timeEnd={props.hours[index].timeEnd}
+					color={color.current}>
 					<span style={{ fontSize: '20px' }}>
 						{props.name}.{props.class}
 					</span>
@@ -42,7 +71,7 @@ export default function Event(props: any) {
 							<span style={{ fontSize: '12px' }}>{props.teacher}</span>
 						</>
 					)}
-				</Box>
+				</EmptyEvent>
 			);
 		});
 	return <>{slots}</>;

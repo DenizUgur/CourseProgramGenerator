@@ -74,7 +74,7 @@ export function getResult(world, input, unavailable_hours) {
 								if (isColliding(U, I)) {
 									eligible = false;
 									log({
-										course: quc.name,
+										name: quc.name,
 										message: {
 											long: `${quc.name} collides with the unavailable hours you defined. We have tried every possible combination between them but there wasn't any solution.`,
 											short: `${quc.name} collides with unavailable hours.`,
@@ -175,7 +175,7 @@ export function getResult(world, input, unavailable_hours) {
 											});
 										} else {
 											log({
-												course: quc.name,
+												name: quc.name,
 												collidesWith: col.name,
 												message: {
 													long: `${quc.name} collides with ${col.name}. We have tried every 
@@ -186,7 +186,7 @@ export function getResult(world, input, unavailable_hours) {
 											throw BreakException;
 										}
 										log({
-											course: quc.name,
+											name: quc.name,
 											message: {
 												long: `There weren't any alternative section for ${quc.name}. 
                         So, we couldn't fit ${quc.name} to your program.`,
@@ -296,25 +296,13 @@ export function getResult(world, input, unavailable_hours) {
 			}
 		});
 
-		//Check if anything has failed
-		/*input.forEach(function(eli) {
-      var f = false;
-      result.forEach(function(el) {
-        if (eli === el.name) f = true;
-      });
-      if (!f) log({
-        course: eli,
-        message: "Impossible to fit to your importance order."
-      });
-    });*/
-
 		// Final filter for alternatives
 		alternatives = alternatives.filter(val => {
 			return table.find(to => to.a === val.a);
 		});
 
 		//Clean logs if there are any course that was fitted after logged
-		errors.filter(val => {
+		errors = errors.filter(val => {
 			return !table.find(to => {
 				return val.name === to.name;
 			});
@@ -329,7 +317,7 @@ export function getResult(world, input, unavailable_hours) {
 }
 
 function isColliding(a, b) {
-	return (a[0] <= b[0] && b[0] <= a[1]) || (b[0] <= a[0] && a[0] <= b[1]);
+	return (a[0] <= b[0] && b[0] < a[1]) || (b[0] <= a[0] && a[0] < b[1]);
 }
 
 function isEqual(a, b) {
