@@ -23,9 +23,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=true react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "CI=true npm test -- --coverage",
+    "coverage": "npm test -- --coverage",
     "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "preelectron-pack": "npm run build",
     "electron-pack": "electron-builder --c.extraMetadata.main=build/electron.js"
