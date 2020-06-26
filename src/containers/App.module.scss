@@ -1,0 +1,30 @@
+.schedule {
+	z-index: 1;
+	height: 75vh;
+}
+
+.controls {
+	user-select: none;
+	z-index: 2;
+	height: 25vh;
+}
+
+.dark:after {
+	z-index: -1;
+	content: '';
+	position: absolute;
+	width: 150%;
+	height: 25vh;
+	transform: translateX(-25%);
+	box-shadow: 0px -4vh 40px #242424;
+}
+
+.light:after {
+	z-index: -1;
+	content: '';
+	position: absolute;
+	width: 150%;
+	height: 25vh;
+	transform: translateX(-25%);
+	box-shadow: 0px -4vh 40px #e2e2e2;
+}

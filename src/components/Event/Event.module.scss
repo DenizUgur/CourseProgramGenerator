@@ -1,0 +1,35 @@
+.main {
+	z-index: 5;
+	border: 2px solid black !important;
+	border-radius: 5px;
+	margin: 1px;
+	cursor: pointer;
+
+	transition: all 250ms ease-in-out;
+
+	&:hover {
+		filter: brightness(90%);
+		transform: scale(1.05);
+	}
+
+	* {
+		border: unset;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+	}
+}
+
+.uh {
+	$dark: rgba(30, 30, 30, 0.5);
+	$light: rgba(100, 100, 100, 0.5);
+	background: repeating-linear-gradient(
+		45deg,
+		$light,
+		$light 10px,
+		$dark 10px,
+		$dark 20px
+	);
+}

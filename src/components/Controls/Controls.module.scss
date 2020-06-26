@@ -1,0 +1,8 @@
+.chipArray {
+	flex: 1;
+	overflow-x: scroll;
+
+	&:empty {
+		display: none;
+	}
+}
