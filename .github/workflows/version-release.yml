@@ -54,13 +54,14 @@ jobs:
         if: matrix.build
         run: |
           npm install
-          npm run prerelease
+          npm run build
       - name: Build Electron app
         if: matrix.build
         id: build_electron
         uses: samuelmeuli/action-electron-builder@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          build_script_name: npm run electron-pack
       - name: Load Release URL File from release job
         if: matrix.build
         uses: actions/download-artifact@v1
