@@ -167,7 +167,7 @@ describe('Algorithm Accuracy', () => {
 					alternatives: [],
 					errors: [
 						{
-							course: 'BUS.102',
+							name: 'BUS.102',
 							message: {
 								long:
 									"BUS.102 collides with the unavailable hours you defined. We have tried every possible combination between them but there wasn't any solution.",
@@ -251,7 +251,7 @@ describe('Fetch Catalog', () => {
 
 		const expectedAction = [
 			{
-				duration: null,
+				duration: 0,
 				level: 'info',
 				message: 'Downloading the latest available catalog...',
 				show: 'Downloading the latest available catalog...',

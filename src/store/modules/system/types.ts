@@ -15,7 +15,7 @@ export interface SystemState {
 				show: boolean;
 				level: LevelType;
 				message: string;
-				duration: number | null;
+				duration: number;
 				update: boolean;
 		  }
 		| undefined;

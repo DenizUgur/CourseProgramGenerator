@@ -34,7 +34,7 @@ export function online(status: boolean) {
 export function snackbar(
 	level?: LevelType,
 	message?: string,
-	duration: number | null = null,
+	duration = 0,
 	update = false
 ) {
 	return {
