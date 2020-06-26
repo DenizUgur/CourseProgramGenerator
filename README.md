@@ -48,5 +48,5 @@ For more information on SemVer, please visit http://semver.org/.
 [2]: https://github.com/DenizUgur/CourseProgramGenerator/issues?state=open
 [3]: https://github.com/DenizUgur/CourseProgramGenerator/issues?state=closed
 [4]: https://github.com/DenizUgur/CourseProgramGenerator/releases/latest
-[5]: #
-[6]: #
+[5]: https://github.com/DenizUgur/CourseProgramGenerator/releases/download/v2.0.0/CourseProgramGenerator.exe
+[6]: https://github.com/DenizUgur/CourseProgramGenerator/releases/download/v2.0.0/CourseProgramGenerator.dmg
