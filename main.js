@@ -97,10 +97,10 @@ function parseHourOBJ(origin) {
 	hourOBJ[1] = origin.split(' | ')[1].split(' - ')[1].trim();
 
 	day = moment.weekdays(true).indexOf(day);
-	hourOBJ[0] = moment('1,' + hourOBJ[0], 'd,HH:mm')
+	hourOBJ[0] = moment.utc('1,' + hourOBJ[0], 'd,HH:mm')
 		.add(day, 'd')
 		.valueOf();
-	hourOBJ[1] = moment('1,' + hourOBJ[1], 'd,HH:mm')
+	hourOBJ[1] = moment.utc('1,' + hourOBJ[1], 'd,HH:mm')
 		.add(day, 'd')
 		.valueOf();
 
