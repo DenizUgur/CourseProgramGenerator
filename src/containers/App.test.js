@@ -5,6 +5,7 @@ import { render, screen } from '../utils';
 import store from '../store';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import MainThemeProvider from './MainThemeProvider';
 
 jest.mock('electron', () => ({
 	shell: {
@@ -18,7 +19,12 @@ describe('<App /> Container', () => {
 
 	test('should render when offline', async () => {
 		reduxStore = mockStore(store.getState());
-		render(<App />, { reduxStore });
+		render(
+			<MainThemeProvider>
+				<App />
+			</MainThemeProvider>,
+			{ reduxStore }
+		);
 
 		const component = await screen.findByTestId('no-internet');
 		expect(component).toBeInTheDocument();
@@ -29,7 +35,12 @@ describe('<App /> Container', () => {
 			...store.getState(),
 			system: { online: true },
 		});
-		render(<App />, { reduxStore });
+		render(
+			<MainThemeProvider>
+				<App />
+			</MainThemeProvider>,
+			{ reduxStore }
+		);
 
 		const component = await screen.findByTestId('title');
 		expect(component).toBeInTheDocument();

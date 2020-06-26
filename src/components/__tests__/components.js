@@ -8,6 +8,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Controls from '../Controls/Controls';
 import NoWiFi from '../NoWiFi/NoWiFi';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('electron', () => ({
 	shell: {
@@ -18,10 +19,19 @@ jest.mock('electron', () => ({
 			exit: jest.fn(),
 		},
 		getCurrentWindow: jest.fn().mockReturnValue({
-            current: null
-        }),
+			current: null,
+		}),
 	},
 }));
+
+global.document.createRange = () => ({
+	setStart: () => {},
+	setEnd: () => {},
+	commonAncestorContainer: {
+		nodeName: 'BODY',
+		ownerDocument: document,
+	},
+});
 
 const state = {
 	system: {
@@ -88,8 +98,8 @@ const state = {
 		],
 		unavailable_hours: [
 			{
-				start: 1592992800000,
-				end: 1592998200000,
+				start: 1592892000000,
+				end: 1592902800000,
 			},
 		],
 		errors: [],
@@ -101,16 +111,80 @@ describe('<Schedule /> Component', () => {
 	let reduxStore;
 
 	beforeAll(() => {
+		Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+			configurable: true,
+			value: 10,
+		});
+		Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+			configurable: true,
+			value: 10,
+		});
+	});
+
+	test('should render selected courses', async () => {
+		reduxStore = mockStore({
+			...store.getState(),
+			...state,
+		});
+
+		render(<Schedule data={state.algorithm.result.primary} />, { reduxStore });
+
+		const component = await screen.findByTestId('schedule');
+		const course = screen.getByText(/BUS.102.A/i);
+
+		expect(component).toBeInTheDocument();
+		expect(course).toBeInTheDocument();
+	});
+
+	test('should render unavailable hours {Mon,Tue 0830-0930}', async () => {
+		reduxStore = mockStore(store.getState());
+		render(<Schedule data={state.algorithm.result.primary} />, { reduxStore });
+
+		const component = await screen.findByTestId('schedule');
+
+		fireEvent.mouseMove(component, { clientX: 15, clientY: 15 });
+		fireEvent.mouseDown(component, { clientX: 15, clientY: 15 });
+		fireEvent.mouseMove(component, { clientX: 25, clientY: 35 });
+		fireEvent.mouseUp(component, { clientX: 25, clientY: 35 });
+
+		const expectedActions = {
+			type: 'ALGORITHM_UNAVAILABLE_HOURS',
+			payload: [
+				{ start: 1592803800000, end: 1592807400000 },
+				{ start: 1592890200000, end: 1592893800000 },
+			],
+		};
+
+		expect(reduxStore.getActions()).toEqual(
+			expect.arrayContaining([expect.objectContaining(expectedActions)])
+		);
+	});
+
+	test('should render and combine unavailable hours {Mon,Tue 0830-0930} with {Tue 0900-1200}', async () => {
 		reduxStore = mockStore({
 			...store.getState(),
 			...state,
 		});
 		render(<Schedule data={state.algorithm.result.primary} />, { reduxStore });
-	});
 
-	test('should render selected courses', async () => {
 		const component = await screen.findByTestId('schedule');
-		expect(component).toBeInTheDocument();
+
+		fireEvent.mouseMove(component, { clientX: 15, clientY: 15 });
+		fireEvent.mouseDown(component, { clientX: 15, clientY: 15 });
+		fireEvent.mouseMove(component, { clientX: 25, clientY: 35 });
+		fireEvent.mouseUp(component, { clientX: 25, clientY: 35 });
+
+		const expectedActions = {
+			type: 'ALGORITHM_UNAVAILABLE_HOURS',
+			payload: [
+				{ start: 1592803800000, end: 1592807400000 },
+				{ start: 1592890200000, end: 1592902800000 },
+			],
+		};
+
+		expect(reduxStore.getActions()).toEqual(
+			expect.arrayContaining([expect.objectContaining(expectedActions)])
+		);
 	});
 });
 
@@ -138,7 +212,7 @@ describe('<Controls /> Component', () => {
 	const mockStore = configureStore([thunk]);
 	let reduxStore;
 
-	beforeAll(() => {
+	beforeEach(() => {
 		reduxStore = mockStore({
 			...store.getState(),
 			...state,
@@ -150,6 +224,68 @@ describe('<Controls /> Component', () => {
 		const component = await screen.findByTestId('chip-array');
 
 		expect(component).toBeInTheDocument();
+	});
+
+	test('should render autocomplete list', async () => {
+		const component = await screen.findByTestId('autocomplete-input');
+		const input = component.getElementsByTagName('input')[0];
+
+		// Initiate autocomplete list to be shown
+		act(() => {
+			fireEvent.change(input, { target: { value: 'b' } });
+		});
+
+		// Check if we have 2 list items
+		const list = screen.getAllByRole('option');
+		expect(list.length).toBe(2);
+	});
+
+	test('should reset appropriately when reset buttons used', async () => {
+		const component = await screen.findByTestId('reset-buttons');
+		const buttons = component.getElementsByTagName('button');
+
+		// Click reset courses button
+		act(() => {
+			fireEvent.click(buttons[0]);
+		});
+
+		expect(reduxStore.getActions().slice(-2)).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					type: 'ALGORITHM_SELECTED_COURSES',
+					payload: [],
+				}),
+			])
+		);
+
+		// Click rest hours button
+		act(() => {
+			fireEvent.click(buttons[1]);
+		});
+
+		expect(reduxStore.getActions().slice(-2)).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					type: 'ALGORITHM_UNAVAILABLE_HOURS',
+					payload: [],
+				}),
+			])
+		);
+
+		act(() => {
+			fireEvent.click(buttons[2]);
+		});
+
+		expect(reduxStore.getActions().slice(-2)).toEqual([
+			{
+				type: 'ALGORITHM_SELECTED_COURSES',
+				payload: [],
+			},
+			{
+				type: 'ALGORITHM_UNAVAILABLE_HOURS',
+				payload: [],
+			},
+		]);
 	});
 });
 
