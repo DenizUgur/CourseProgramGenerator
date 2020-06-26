@@ -11,7 +11,7 @@
 
 Simply type the courses you want and a schedule optimized for the courses you want will be generated in seconds. Also alternative classes will be available if you would like to see some other options for your schedule.
 
-### Download latest version
+Download latest version
 ----------------
 You can see the latest release information [here][4].
 
