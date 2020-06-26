@@ -13,6 +13,7 @@ import {
 	Button,
 	Tooltip,
 	useTheme,
+	ButtonGroup,
 } from '@material-ui/core';
 import { Course } from '../../store/modules/algorithm/types';
 
@@ -132,7 +133,7 @@ export default function Controls() {
 											  };
 
 										const error_message = (name: string) => {
-											let node = result.errors.find(e => name === e.course);
+											let node = result.errors.find(e => name === e.name);
 											if (node) return node.message.short;
 											return '';
 										};
@@ -173,6 +174,7 @@ export default function Controls() {
 							)}
 							renderInput={params => (
 								<TextField
+									data-testid="autocomplete-input"
 									{...params}
 									variant="filled"
 									label="Courses"
@@ -199,14 +201,40 @@ export default function Controls() {
 							: ''
 					}
 					disableHoverListener={data_status === 'ready'}>
-					<span style={{ justifyContent: 'center', display: 'flex' }}>
-						<Button
-							style={{ width: '100%' }}
-							disabled={data_status !== 'ready'}
-							color="primary"
-							variant="outlined">
-							Unavailable Hours
-						</Button>
+					<span
+						style={{
+							justifyContent: 'center',
+							display: 'flex',
+							flexDirection: 'column',
+							textAlign: 'center',
+						}}>
+						<span style={{ fontSize: '16px', paddingBottom: '2%' }}>Reset</span>
+						<ButtonGroup
+							data-testid="reset-buttons"
+							style={{ width: '100%', display: 'flex' }}
+							disabled={data_status !== 'ready'}>
+							<Button
+								onClick={() => dispatch(deploy([], undefined))}
+								color="primary"
+								variant="contained"
+								style={{ flex: 1 }}>
+								Courses
+							</Button>
+							<Button
+								onClick={() => dispatch(deploy(undefined, []))}
+								color="secondary"
+								variant="contained"
+								style={{ flex: 1 }}>
+								Hours
+							</Button>
+							<Button
+								onClick={() => dispatch(deploy([], []))}
+								color="primary"
+								variant="contained"
+								style={{ flex: 1 }}>
+								All
+							</Button>
+						</ButtonGroup>
 					</span>
 				</Tooltip>
 
