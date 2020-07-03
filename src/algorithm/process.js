@@ -11,12 +11,11 @@ export function getResult(world, input, unavailable_hours, referance_time) {
 
 		if (unavailable_hours) {
 			const normalize = time => {
-				const now = moment(time).diff(moment(0), "week")
-				const ref = moment(referance_time).diff(moment(0), "week")
+				const now = moment(time).diff(moment(0), 'week');
+				const ref = moment(referance_time).diff(moment(0), 'week');
 
-				return moment(time)
-					.subtract(now - ref, 'week')
-					.valueOf();
+				let diff = now - ref < 0 ? 0 : now - ref;
+				return moment(time).subtract(diff, 'week').valueOf();
 			};
 
 			unavailable_hours.forEach(function (el, i) {
