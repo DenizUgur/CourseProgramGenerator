@@ -17,13 +17,15 @@ const INITIAL_STATE: AlgorithmState = {
 	selected_courses: [],
 	unavailable_hours: [],
 	errors: [],
+	referance_time: null,
 };
 
 export default function algorithm(state = INITIAL_STATE, action: any) {
 	return produce(state, draft => {
 		switch (action.type) {
 			case UPDATE_COURSES:
-				draft.all_courses = action.payload;
+				draft.all_courses = action.payload.courses;
+				draft.referance_time = action.payload.created_on;
 				break;
 
 			case SELECTED_COURSES:

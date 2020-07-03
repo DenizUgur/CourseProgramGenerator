@@ -50,7 +50,7 @@ const state = {
 					class: 'A',
 					teacher: 'Jason Nick Shing Lau',
 					corequisite: ['BUS.102L'],
-					hours: [[1592890800000, 1592901000000]],
+					hours: [[1593506400000, 1593516600000]],
 				},
 				{
 					name: 'BUS.102L',
@@ -59,7 +59,7 @@ const state = {
 					class: 'A',
 					teacher: 'Jason Nick Shing Lau',
 					corequisite: ['BUS.102'],
-					hours: [[1592901600000, 1592904600000]],
+					hours: [[1593517200000, 1593520200000]],
 				},
 			],
 			alternatives: [],
@@ -73,7 +73,7 @@ const state = {
 				class: 'A',
 				teacher: 'Jason Nick Shing Lau',
 				corequisite: ['BUS.102L'],
-				hours: [[1592890800000, 1592901000000]],
+				hours: [[1593506400000, 1593516600000]],
 			},
 			{
 				name: 'BUS.102L',
@@ -82,7 +82,7 @@ const state = {
 				class: 'A',
 				teacher: 'Jason Nick Shing Lau',
 				corequisite: ['BUS.102'],
-				hours: [[1592901600000, 1592904600000]],
+				hours: [[1593517200000, 1593520200000]],
 			},
 		],
 		selected_courses: [
@@ -93,13 +93,13 @@ const state = {
 				class: 'A',
 				teacher: 'Jason Nick Shing Lau',
 				corequisite: ['BUS.102L'],
-				hours: [[1592890800000, 1592901000000]],
+				hours: [[1593506400000, 1593516600000]],
 			},
 		],
 		unavailable_hours: [
 			{
-				start: 1592892000000,
-				end: 1592902800000,
+				start: 1593506400000,
+				end: 1593516600000,
 			},
 		],
 		errors: [],
@@ -150,8 +150,8 @@ describe('<Schedule /> Component', () => {
 		const expectedActions = {
 			type: 'ALGORITHM_UNAVAILABLE_HOURS',
 			payload: [
-				{ end: 1592818200000, start: 1592814600000 },
-				{ end: 1592904600000, start: 1592901000000 },
+				{ end: 1593423000000, start: 1593419400000 },
+				{ end: 1593509400000, start: 1593505800000 },
 			],
 		};
 
@@ -177,8 +177,8 @@ describe('<Schedule /> Component', () => {
 		const expectedActions = {
 			type: 'ALGORITHM_UNAVAILABLE_HOURS',
 			payload: [
-				{ end: 1592818200000, start: 1592814600000 },
-				{ end: 1592904600000, start: 1592892000000 },
+				{ end: 1593423000000, start: 1593419400000 },
+				{ end: 1593516600000, start: 1593505800000 },
 			],
 		};
 

@@ -3,18 +3,28 @@ const originalMoment = require('moment');
 const moment = (...args) => originalMoment.utc(...args);
 var errors = [];
 
-export function getResult(world, input, unavailable_hours) {
+export function getResult(world, input, unavailable_hours, referance_time) {
 	return new Promise((resolve, reject) => {
 		var found = [];
 		var result = [];
 		errors = [];
 
 		if (unavailable_hours) {
+			const normalize = time => {
+				const weekDifference = moment(time).week() - moment(referance_time).week();
+				const yearDifference = moment(time).year() - moment(referance_time).year();
+
+				return moment(time)
+					.subtract(weekDifference, 'week')
+					.subtract(yearDifference, 'year')
+					.valueOf();
+			};
+
 			unavailable_hours.forEach(function (el, i) {
 				result.push({
 					name: null,
 					class: null,
-					hours: [[moment(el.start).valueOf(), moment(el.end).valueOf()]],
+					hours: [[normalize(el.start), normalize(el.end)]],
 				});
 			});
 		}

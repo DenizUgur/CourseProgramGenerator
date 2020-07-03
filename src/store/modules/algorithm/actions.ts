@@ -51,7 +51,8 @@ export function deploy(courses?: Course[], hours?: HourType[]) {
 			const res = await getResult(
 				Object.assign([], state.algorithm.all_courses),
 				courses.map(c => c.name),
-				hours
+				hours,
+				state.algorithm.referance_time
 			);
 
 			if (res.errors) {
@@ -84,7 +85,8 @@ export function download() {
 		dispatch(data('not ready'));
 
 		return fetch(
-			'https://www.denizdaking.com/CourseProgramGenerator/catalog.json'
+			`https://www.denizdaking.com/CourseProgramGenerator/catalog.json?dummy=${Date.now()}`,
+			{ cache: 'no-store' }
 		)
 			.then(res => res.json())
 			.then(catalog => {

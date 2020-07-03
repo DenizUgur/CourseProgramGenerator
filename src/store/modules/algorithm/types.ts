@@ -28,4 +28,5 @@ export interface AlgorithmState {
 	all_courses: Course[];
 	unavailable_hours: HourType[];
 	errors: any[];
+	referance_time: number | null;
 }

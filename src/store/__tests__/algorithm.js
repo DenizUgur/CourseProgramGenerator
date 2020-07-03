@@ -114,11 +114,11 @@ describe('Algorithm Accuracy', () => {
 				class: 'A',
 				teacher: 'Jason Nick Shing Lau',
 				corequisite: ['BUS.102L'],
-				hours: [[1592890800000, 1592901000000]],
+				hours: [[1593506400000, 1593516600000]],
 			},
 		];
 
-		const unavailable_hours = [{ start: 1592890800000, end: 1592901000000 }];
+		const unavailable_hours = [{ start: 1593506400000, end: 1593516600000 }];
 
 		reduxStore = mockStore({
 			...store.getState(),
@@ -131,7 +131,7 @@ describe('Algorithm Accuracy', () => {
 						class: 'A',
 						teacher: 'Jason Nick Shing Lau',
 						corequisite: ['BUS.102L'],
-						hours: [[1592890800000, 1592901000000]],
+						hours: [[1593506400000, 1593516600000]],
 					},
 					{
 						name: 'BUS.102L',
@@ -140,7 +140,7 @@ describe('Algorithm Accuracy', () => {
 						class: 'A',
 						teacher: 'Jason Nick Shing Lau',
 						corequisite: ['BUS.102'],
-						hours: [[1592901600000, 1592904600000]],
+						hours: [[1593517200000, 1593520200000]],
 					},
 				],
 				unavailable_hours,
@@ -197,10 +197,11 @@ describe('Test Algorithm Reducers', () => {
 		expect(
 			algorithm(reduxStore.getState(), {
 				type: types.UPDATE_COURSES,
-				payload: ['TEST'],
+				payload: { created_on: 1, courses: [] },
 			})
 		).toMatchObject({
-			all_courses: ['TEST'],
+			all_courses: [],
+			referance_time: 1
 		});
 	});
 

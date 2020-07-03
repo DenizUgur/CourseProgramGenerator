@@ -1,7 +1,7 @@
 import { getResult } from './process';
 import moment from 'moment';
 
-const world = require('../../__mocks__/catalog.json');
+const world = require('../../__mocks__/catalog.json').courses;
 
 const c = (s, e) => {
 	return {
