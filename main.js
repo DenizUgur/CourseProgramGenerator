@@ -21,16 +21,16 @@ fs.readdir(directoryPath, function (err, files) {
 
 		for (var ii = 2; cell(0, ii) !== undefined; ii++) {
 			var course = {
-                name: null,
-                title: null,
+				name: null,
+				title: null,
 				credits: null,
 				class: null,
 				teacher: null,
 				corequisite: null,
 				hours: [],
 			};
-            course.name = cell(0, ii) + '.' + cell(1, ii);
-            course.title = lowerCaseAllWordsExceptFirstLetters(cell(3, ii));
+			course.name = cell(0, ii) + '.' + cell(1, ii);
+			course.title = lowerCaseAllWordsExceptFirstLetters(cell(3, ii));
 			course.credits = parseInt(cell(6, ii));
 			course.class = cell(2, ii);
 			course.teacher = lowerCaseAllWordsExceptFirstLetters(cell(4, ii));
@@ -64,9 +64,18 @@ fs.readdir(directoryPath, function (err, files) {
 			}
 			world.push(course);
 		}
-    });
-    console.log(isUnique(world) ? "No duplicates found." : "There are some duplicates");
-	fs.writeFileSync('catalog.json', JSON.stringify(world));
+	});
+	console.log(
+		isUnique(world) ? 'No duplicates found.' : 'There are some duplicates'
+	);
+	fs.writeFileSync(
+		'catalog.json',
+		JSON.stringify({
+			name: "Ozyegin 2019-2020 Summer",
+			created_on: moment.utc().valueOf(),
+			courses: world,
+		})
+	);
 });
 
 function isEqual(a, b) {
@@ -97,10 +106,12 @@ function parseHourOBJ(origin) {
 	hourOBJ[1] = origin.split(' | ')[1].split(' - ')[1].trim();
 
 	day = moment.weekdays(true).indexOf(day);
-	hourOBJ[0] = moment.utc('1,' + hourOBJ[0], 'd,HH:mm')
+	hourOBJ[0] = moment
+		.utc('1,' + hourOBJ[0], 'd,HH:mm')
 		.add(day, 'd')
 		.valueOf();
-	hourOBJ[1] = moment.utc('1,' + hourOBJ[1], 'd,HH:mm')
+	hourOBJ[1] = moment
+		.utc('1,' + hourOBJ[1], 'd,HH:mm')
 		.add(day, 'd')
 		.valueOf();
 
@@ -108,15 +119,15 @@ function parseHourOBJ(origin) {
 }
 
 function isUnique(arr) {
-    const seenValues = {};
-  
-    for (let i = 0; i < arr.length; i++) {
-      if (seenValues[arr[i].name + arr[i].class]) {
-        return false;
-      } else {
-        seenValues[arr[i].name + arr[i].class] = true;
-      }
-    }
-  
-    return true;
-  }
+	const seenValues = {};
+
+	for (let i = 0; i < arr.length; i++) {
+		if (seenValues[arr[i].name + arr[i].class]) {
+			return false;
+		} else {
+			seenValues[arr[i].name + arr[i].class] = true;
+		}
+	}
+
+	return true;
+}
