@@ -20,6 +20,18 @@ async function test(input, uhours = '', size = false) {
 }
 
 describe('Algorithm Test', () => {
+	let dateSpy;
+
+	afterAll(() => {
+		dateSpy.mockRestore();
+	});
+
+	beforeAll(() => {
+		dateSpy = jest
+			.spyOn(global.Date, 'now')
+			.mockImplementation(() => Date.parse('2020-06-28'));
+	});
+
 	it("shouldn't give anything when NAN.101 is given", () => {
 		return expect(test(['NAN.101'], '', true)).resolves.toBe(0);
 	});

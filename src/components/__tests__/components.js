@@ -109,8 +109,17 @@ const state = {
 describe('<Schedule /> Component', () => {
 	const mockStore = configureStore([thunk]);
 	let reduxStore;
+	let dateSpy;
+
+	afterAll(() => {
+		dateSpy.mockRestore();
+	});
 
 	beforeAll(() => {
+		dateSpy = jest
+			.spyOn(global.Date, 'now')
+			.mockImplementation(() => Date.parse('2020-06-28'));
+
 		Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
 			configurable: true,
 			value: 10,
