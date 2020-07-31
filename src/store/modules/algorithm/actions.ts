@@ -85,7 +85,7 @@ export function download() {
 		dispatch(data('not ready'));
 
 		return fetch(
-			`https://www.denizdaking.com/CourseProgramGenerator/catalog.json?dummy=${Date.now()}`,
+			`https://www.denizugur.dev/CourseProgramGenerator/catalog.json?dummy=${Date.now()}`,
 			{ cache: 'no-store' }
 		)
 			.then(res => res.json())
