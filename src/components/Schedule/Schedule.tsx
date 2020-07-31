@@ -128,14 +128,6 @@ export default function Schedule(props: any) {
 		if (event.target && className.indexOf('MuiButton') === -1) {
 			setStartPos(pos);
 			setDraw(true);
-
-			dispatch(
-				snackbar(
-					'info',
-					'You can select an area to be marked as unavailable hours. Just drag and release and new schedule will be calculated.',
-					6000
-				)
-			);
 		}
 	};
 

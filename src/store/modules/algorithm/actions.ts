@@ -57,14 +57,14 @@ export function deploy(courses?: Course[], hours?: HourType[]) {
 
 			if (res.errors) {
 				if (res.errors.length === 1)
-					dispatch(snackbar('info', res.errors[0].message.long, 5000));
+					dispatch(snackbar('info', res.errors[0].message.long, 2000));
 				else if (res.errors.length > 1)
 					dispatch(
 						snackbar(
 							'info',
 							`There are several issues with selected courses. 
 							If you hover over the course name chips you can see their issues.`,
-							5000
+							2000
 						)
 					);
 			}
