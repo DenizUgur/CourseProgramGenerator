@@ -27,6 +27,17 @@ global.fetch = jest.fn(() =>
 describe('Algorithm Accuracy', () => {
 	const mockStore = configureStore([thunk]);
 	let reduxStore;
+	let dateSpy;
+
+	afterAll(() => {
+		dateSpy.mockRestore();
+	});
+
+	beforeAll(() => {
+		dateSpy = jest
+			.spyOn(global.Date, 'now')
+			.mockImplementation(() => Date.parse('2020-06-28'));
+	});
 
 	test('should deploy without errors', async () => {
 		reduxStore = mockStore({
@@ -157,7 +168,7 @@ describe('Algorithm Accuracy', () => {
 				level: 'info',
 				message:
 					"BUS.102 collides with the unavailable hours you defined. We have tried every possible combination between them but there wasn't any solution.",
-				duration: 5000,
+				duration: 2000,
 				update: false,
 			},
 			{
@@ -201,7 +212,7 @@ describe('Test Algorithm Reducers', () => {
 			})
 		).toMatchObject({
 			all_courses: [],
-			referance_time: 1
+			referance_time: 1,
 		});
 	});
 

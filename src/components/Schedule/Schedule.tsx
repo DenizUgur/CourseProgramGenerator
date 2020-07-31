@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useLayoutEffect, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState, deploy, snackbar } from '../../store';
+import { AppState, deploy } from '../../store';
 import { Course, HourType } from '../../store/modules/algorithm/types';
 
 import styles from './Schedule.module.scss';
