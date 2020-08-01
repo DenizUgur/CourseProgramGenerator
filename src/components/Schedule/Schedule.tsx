@@ -148,8 +148,10 @@ export default function Schedule(props: any) {
 	const onMouseUp = (event: React.MouseEvent) => {
 		if (draw) {
 			setDraw(false);
-			dispatch(deploy(undefined, draft));
-			setDraft(undefined);
+			if (draft) {
+				dispatch(deploy(undefined, draft));
+				setDraft(undefined);
+			}
 		}
 	};
 

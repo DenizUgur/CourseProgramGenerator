@@ -28,6 +28,9 @@ export default function Controls() {
 	const selectedCourses = useSelector(
 		(state: AppState) => state.algorithm.selected_courses
 	);
+	const unavailableHours = useSelector(
+		(state: AppState) => state.algorithm.unavailable_hours
+	);
 	const dispatch = useDispatch();
 
 	const container = React.useRef(null);
@@ -214,6 +217,7 @@ export default function Controls() {
 							style={{ width: '100%', display: 'flex' }}
 							disabled={data_status !== 'ready'}>
 							<Button
+								disabled={selectedCourses.length === 0}
 								onClick={() => dispatch(deploy([], undefined))}
 								color="primary"
 								variant="contained"
@@ -221,6 +225,7 @@ export default function Controls() {
 								Courses
 							</Button>
 							<Button
+								disabled={unavailableHours.length === 0}
 								onClick={() => dispatch(deploy(undefined, []))}
 								color="secondary"
 								variant="contained"
@@ -228,6 +233,7 @@ export default function Controls() {
 								Hours
 							</Button>
 							<Button
+								disabled={unavailableHours.length === 0 && selectedCourses.length === 0}
 								onClick={() => dispatch(deploy([], []))}
 								color="primary"
 								variant="contained"

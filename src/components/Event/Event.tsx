@@ -11,6 +11,13 @@ import randomColor from 'randomcolor';
 
 export function EmptyEvent(props: any) {
 	const theme = useTheme();
+	const themeMode = useSelector((state: AppState) => state.system.mode);
+	let color = useRef(randomColor({ luminosity: themeMode }));
+
+	useMemo(() => {
+		color.current = randomColor({ luminosity: themeMode });
+	}, [themeMode]);
+
 	return (
 		<Box
 			className={[styles.main, props.onDelete ? styles.uh : undefined].join(' ')}
@@ -19,8 +26,8 @@ export function EmptyEvent(props: any) {
 					? {
 							gridColumn: `track-${props.day}`,
 							gridRow: `time-${props.timeStart} / time-${props.timeEnd}`,
-							backgroundColor: props.color,
-							color: theme.palette.getContrastText(props.color),
+							backgroundColor: color.current,
+							color: theme.palette.getContrastText(color.current),
 					  }
 					: {
 							gridColumn: `track-${props.day}`,
@@ -35,7 +42,9 @@ export function EmptyEvent(props: any) {
 			{props.children ? (
 				props.children
 			) : (
-				<Button variant="outlined" onClick={props.onDelete}>
+				<Button
+					variant={themeMode === 'dark' ? 'outlined' : 'contained'}
+					onClick={props.onDelete}>
 					Remove
 				</Button>
 			)}
@@ -44,13 +53,6 @@ export function EmptyEvent(props: any) {
 }
 
 export default function Event(props: any) {
-	const themeMode = useSelector((state: AppState) => state.system.mode);
-	let color = useRef(randomColor({ luminosity: themeMode }));
-
-	useMemo(() => {
-		color.current = randomColor({ luminosity: themeMode });
-	}, [themeMode]);
-
 	const slots = Array(props.hours.length)
 		.fill(null)
 		.map((_: any, index: number) => {
@@ -61,7 +63,7 @@ export default function Event(props: any) {
 					day={props.hours[index].day}
 					timeStart={props.hours[index].timeStart}
 					timeEnd={props.hours[index].timeEnd}
-					color={color.current}>
+					color={true}>
 					<span style={{ fontSize: '20px' }}>
 						{props.name}.{props.class}
 					</span>
