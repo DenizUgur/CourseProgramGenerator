@@ -71,7 +71,7 @@ fs.readdir(directoryPath, function (err, files) {
 	fs.writeFileSync(
 		'catalog.json',
 		JSON.stringify({
-			name: "Ozyegin 2019-2020 Summer",
+			name: "Ozyegin 2020-2021 Spring",
 			created_on: moment.utc().valueOf(),
 			courses: world,
 		})
