@@ -2,7 +2,7 @@
   "name": "courseprogramgen",
   "productName": "Course Program Generator",
   "description": "Automated program generator with alternatives",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "private": true,
   "author": "Deniz Uğur <deniz343@gmail.com>",
   "copyright": "© 2020, Deniz",
