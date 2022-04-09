@@ -78,7 +78,7 @@
     "jest": "24.9.0",
     "jest-enzyme": "^7.1.2",
     "kind-of": ">=6.0.3",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "notistack": "^0.9.17",
     "path": "^0.12.7",
     "randomcolor": "^0.5.4",
