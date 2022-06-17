@@ -67,7 +67,7 @@
     "@types/react-redux": "^7.1.9",
     "concurrently": "^5.2.0",
     "dot-prop": ">=5.1.1",
-    "electron": "^9.4.4",
+    "electron": "^15.5.5",
     "electron-builder": "^22.7.0",
     "electron-devtools-installer": "^3.0.0",
     "elliptic": ">=6.5.3",
